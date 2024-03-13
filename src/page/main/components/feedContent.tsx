@@ -1,12 +1,18 @@
 import React from "react";
 import { Image } from "antd";
 
-const FeedContent:React.FC = () =>{
+
+interface feedContent {
+    path? : string,
+    size? : string,
+    type? : string,
+}
+
+const FeedContent:React.FC<feedContent> = ({path ,size ,type}:feedContent) =>{
     return <div className="py-2">
             <Image
-            className="rounded-lg"
-             width={400}
-             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+            className="rounded-lg object-fit"
+             src={path}
             />
         </div>
 }

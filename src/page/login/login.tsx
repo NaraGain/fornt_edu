@@ -1,13 +1,15 @@
 import React from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Login: React.FC = () => {
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
   };
+
+  const navigator = useNavigate()
 
   return (
     <div className='flex flex-col mx-auto h-screen 
@@ -44,7 +46,9 @@ const Login: React.FC = () => {
  
       <Form.Item>
         <div className='grid grid-cols-2 gap-3'>
-        <Button className="bg-blue-500 text-white" htmlType="submit">
+        <Button
+        onClick={()=>navigator('/main')}
+        className="bg-blue-500 text-white" htmlType="submit">
           log in
         </Button>
         <Link to={'/register'}>

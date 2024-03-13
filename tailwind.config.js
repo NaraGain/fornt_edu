@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        notoSans : "'noto-san' , serif",
+        nokora :  ['nokora', 'sans-serif']
       }
     },
   },

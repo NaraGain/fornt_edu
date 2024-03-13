@@ -4,14 +4,24 @@ import React from "react"
 import { ArrowLeftOutlined } from "@ant-design/icons"
 
 
-const NavigatorButton:React.FC = () => {
+interface navigateButton  {
+    text : string,
+}
+
+const NavigatorButton:React.FC<navigateButton> = ({text}:navigateButton) => {
 
     const navigate = useNavigate()
 
-    return <Button className="mb-3 flex items-center  rounded-full shadow-sm dark:bg-zinc-900
-     dark:text-white bg-neutral-50 border-none" type="default"
+    return <Button 
+    className="mb-3 flex 
+    items-center 
+     rounded-full
+      shadow-sm
+       dark:bg-zinc-900
+     dark:text-white bg-neutral-100 border-none" type="default"
     onClick={()=> navigate(-1)}>
         <ArrowLeftOutlined/>
+        {text}
     </Button>
 }
 

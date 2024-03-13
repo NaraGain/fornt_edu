@@ -1,12 +1,19 @@
 import React from "react";
 import {BookOutlined, CoffeeOutlined, FileOutlined,
+      HomeOutlined,
       PlusOutlined, StarOutlined} from '@ant-design/icons'
 import { Link } from "react-router-dom";
 import { Button } from "antd";
 import { CreateFeed } from "./createFeed";
 
-const itemsList = [{
-    name : "favarite",
+const itemsList = [
+    {
+        name : "home",
+        icon : <HomeOutlined style={{color:"white"}}/>,
+        color : "bg-blue-500",
+        },
+    {
+    name : "favorite",
     icon : <StarOutlined style={{color:"white"}}/>,
     color : "bg-blue-500",
     },
@@ -31,13 +38,19 @@ const itemsList = [{
 
 const LeftBar:React.FC = () =>{
     return <div className="">
-          <CreateFeed></CreateFeed>
-    <ul className="text-[14px] my-2 max-w-36">
-    <p className="px-3 my-2 bg-blue-100
-     text-blue-500 inline-flex rounded-md">my time</p>
+        <div className="inline-block">
+        <h1 className="px-3 my-2 bg-blue-100
+     text-blue-500 inline-flex rounded-md">what is news?</h1>
+     <div>
+     <CreateFeed></CreateFeed>
+     </div>
+        </div>
+    <ul className="text-[16px] my-2 max-w-36">
+    <h1 className="px-3 my-2 bg-blue-100
+     text-blue-500 inline-flex rounded-md">my time</h1>
        {
-        itemsList.map((item,key)=> {return (<li key={key}>
-                    <Link to={"#"}>
+        itemsList.map((item,key)=> {return (<li  key={key}>
+                    <Link  to={`/${item.name}`}>
                     <div className='inline-flex w-full px-2 rounded-md
                      hover:bg-neutral-100 dark:hover:bg-slate-800 py-2 gap-2'>
                     <div className={`${item.color} p-1 flex items-center rounded-md`}>

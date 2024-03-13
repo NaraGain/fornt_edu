@@ -1,10 +1,14 @@
-import { Avatar,Space,Dropdown, Input, Modal, ConfigProvider } from "antd";
+import { Avatar,Space,Dropdown, Input, Modal, ConfigProvider,Badge } from "antd";
 import React, { useEffect, useState } from "react";
 import type { MenuProps } from 'antd'
-import { LaptopOutlined, LogoutOutlined, MoonOutlined,
+import { BellFilled, BellOutlined, LaptopOutlined, LogoutOutlined, MoonOutlined,
    PieChartFilled,
+   SearchOutlined,
    SettingOutlined,
    SkinOutlined, SunOutlined, UserOutlined } from "@ant-design/icons";
+import { Notification } from "./notification";
+import { SearchBtn } from "./searchBtn";
+import { Link } from "react-router-dom";
 
 
 
@@ -31,7 +35,7 @@ const Navbar:React.FC = () =>{
           <div className="bg-blue-500 px-1 rounded-md">
             <UserOutlined style={{color:'white'}}/>
           </div>
-         <a>profile</a>
+         <Link to={"/profile"}>profile</Link>
       </div>,
     key : 0,
   },
@@ -72,6 +76,10 @@ const Navbar:React.FC = () =>{
     }
 }
 
+const notification:MenuProps['items'] = [{
+    key : 1,
+    label : <label>notification</label>
+}]
 
 
 
@@ -137,6 +145,9 @@ const ChangeThmem = () => {
   </ConfigProvider>
 }
 
+
+
+
 useEffect(()=>{
     switch(theme){
         case "dark":
@@ -167,21 +178,11 @@ useEffect(()=>{
                 <div className="flex items-center justify-between">
                 <span className="font-bold gap-2 items-center text-white font-mono flex">
                   <PieChartFilled
-                   className="text-xl"/>
-                  <p>
-                  កវី
-                  </p>
-                </span>
-                 <span>
-                  <Input
-                  className="dark:bg-zinc-700
-                  w-[20rem] rounded-lg
-                   text-white dark:border-slate-500"
-                  placeholder="search"
-                  />
-                 </span>
-                <span >
-
+                   className="text-[2rem] font-nokora "/>
+                </span> 
+                <span className="flex gap-5 items-center" >
+                 <SearchBtn/>
+                <Notification></Notification>
                   <Dropdown
                   arrow={true} 
                   className="cursor-pointer w-full text-neutral-500"

@@ -1,5 +1,5 @@
 import { Button, Modal,Tabs, Input, Upload, ConfigProvider } from "antd"
-import { CloseOutlined, EditOutlined, FileImageOutlined, PlusOutlined, RocketOutlined, ToTopOutlined } from "@ant-design/icons"
+import { CloseOutlined, EditOutlined, FileImageOutlined, PlusCircleOutlined, PlusOutlined, RocketOutlined, ToTopOutlined } from "@ant-design/icons"
 import { useState } from "react"
 import type { TabsProps } from 'antd';
 const {TextArea} = Input
@@ -56,11 +56,18 @@ setOpen(false)
 }
 
     return <>
-      <Button 
+      <button
         onClick={()=> showModal()}
-            icon={<PlusOutlined/>}
-            className="mb-2 border-1 dark:text-neutral-300 text-[14px]
-             border-dashed">create post</Button>
+            className="mb-2 border-none
+            hover:bg-neutral-100 rounded-md px-2 py-2
+                inline-flex items-center gap-2
+             shadow-none text-center 
+             dark:text-neutral-300 text-[16px]">
+                <div className="bg-blue-400 p-1 flex items-center
+                 text-white rounded-md">
+                <PlusCircleOutlined/>
+                </div>
+               <p className=" text-neutral-600 dark:text-neutral-100">upload post</p></button>
              <ConfigProvider
              theme={{
              components:{
