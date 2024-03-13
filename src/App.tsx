@@ -41,6 +41,7 @@ const location = useLocation()
           <Route path='/library' element={<Library></Library>}></Route>
           <Route path='/class' element={<Classes/>}></Route>
           <Route path='/about' element={<About/>}></Route>
+          <Route path='/notification' element={<h1>notification</h1>}></Route>
         </Route>
         <Route path='/test' element={<Test/>}></Route>
       </Routes>

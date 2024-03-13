@@ -16,7 +16,7 @@ export const HeaderProfile:React.FC<headerprofile> = ({
     return    <div className="dark:bg-zinc-900 flex 
      items-center w-full 
      static py-7
-     rounded-xl bg-neutral-50 shadow-sm ">
+     rounded-xl     bg-gradient-to-l from-blue-50 to-white ">
     <div className="grid grid-cols-3 w-full text-center text-[20px]">
         <div className="basis-1/3
             space-y-2

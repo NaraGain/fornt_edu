@@ -31,12 +31,15 @@ const Navbar:React.FC = () =>{
   }
 
   const items:MenuProps['items'] = [{
-    label: <div className="flex gap-3">
+    label:<Link to={"/profile"}> 
+    <div className="flex gap-3">
           <div className="bg-blue-500 px-1 rounded-md">
             <UserOutlined style={{color:'white'}}/>
           </div>
-         <Link to={"/profile"}>profile</Link>
-      </div>,
+        profile
+      </div>
+      </Link>
+      ,
     key : 0,
   },
   {

@@ -13,7 +13,7 @@ const MainLayout:React.FC = ()=>{
                 <LeftBar/>
                 </div>
                 </div>
-        <div className="basis-[80%] ">
+        <div className="basis-[80%]">
         <Outlet/>
         </div>
             </div>
