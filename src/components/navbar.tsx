@@ -53,7 +53,7 @@ const Navbar:React.FC = () =>{
 
   {
     key:4,
-    label : <button onClick={()=> setTheme('dark')} className="flex gap-2 items-center">
+    label : <button className="flex gap-2 items-center">
       <div className="bg-blue-500 px-1 rounded-md">
            <SettingOutlined style={{color:'white'}}/>
       </div>

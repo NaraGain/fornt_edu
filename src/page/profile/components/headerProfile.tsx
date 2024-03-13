@@ -1,14 +1,15 @@
 import React from "react";
 import { UsergroupAddOutlined, UserOutlined, TrophyOutlined } from "@ant-design/icons";
+
 interface headerprofile {
-    follower : string,
-    following : string,
-    achivment : string
+    follower? : string,
+    following? : string,
+    achivment? : string
 
 }
 
 
-export const HeaderProfile:React.FC<headerprofile> = ({
+const HeaderProfile:React.FC<headerprofile> = ({
     follower,
     following,
     achivment
@@ -42,3 +43,5 @@ export const HeaderProfile:React.FC<headerprofile> = ({
     </div>
     </div>
 }
+
+export default HeaderProfile

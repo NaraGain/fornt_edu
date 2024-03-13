@@ -4,7 +4,7 @@ import { AppstoreOutlined, CameraOutlined,
      EditOutlined, 
      MoreOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 import { Link, Outlet } from "react-router-dom";
-import { HeaderProfile } from "./components/headerProfile";
+import HeaderProfile from "./components/headerProfile";
 
 
 
