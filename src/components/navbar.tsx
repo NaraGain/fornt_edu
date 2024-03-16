@@ -32,7 +32,7 @@ const Navbar:React.FC = () =>{
 
   const items:MenuProps['items'] = [{
     label:<Link to={"/profile"}> 
-    <div className="flex gap-3">
+    <div className="flex gap-3 font-nokora">
           <div className="bg-blue-500 px-1 rounded-md">
             <UserOutlined style={{color:'white'}}/>
           </div>
@@ -44,8 +44,8 @@ const Navbar:React.FC = () =>{
   },
   {
     key : 1,
-    label :<div className="flex  gap-3">
-      <div className="bg-purple-500 px-1 rounded-md">
+    label :<div className="flex font-nokora  gap-3">
+      <div className="bg-purple-500 px-1 flex gap-3 rounded-md">
           <SkinOutlined  style={{color:'white'}}/>
         </div> 
     <a onClick={handleShow}>Display Setting</a></div>,
@@ -53,16 +53,16 @@ const Navbar:React.FC = () =>{
 
   {
     key:4,
-    label : <button className="flex gap-2 items-center">
-      <div className="bg-blue-500 px-1 rounded-md">
+    label : <div className="flex font-nokora gap-3 ">
+      <div className="flex gap-3 bg-green-400  rounded-md px-1">
            <SettingOutlined style={{color:'white'}}/>
       </div>
-      settings & privacy</button>
+      <a>settings & privacy</a></div>
   },
 
   {
-    label:<div className="flex gap-3">
-        <div className="flex gap-3 bg-red-500 rounded-md px-1">
+    label:<div className="flex font-nokora gap-3">
+        <div className="flex gap-3 bg-red-500  rounded-md px-1">
           <LogoutOutlined style={{ color:'white'}}/>
           </div>    
       <a>log out</a></div>,
@@ -102,6 +102,7 @@ const ChangeThmem = () => {
     footer={false}
    title={<label className="dark:bg-zinc-800
    text-neutral-700 dark:text-neutral-100
+   font-nokora
    inline-flex gap-2">
 <div className="bg-blue-400 px-1 rounded-md">
 <SettingOutlined style={{color:'white'}}/>
@@ -110,9 +111,9 @@ const ChangeThmem = () => {
 </label>}
   open={isModalOpen}
   onCancel={handleCannle}>
-    <div className="grid grid-cols-3 gap-3 p-3">
+    <div className="grid font-nokora grid-cols-3 gap-3 p-3">
        <button onClick={()=>setTheme('light')}>
-        <div className="bg-blue-50 dark:bg-zinc-700 
+        <div className="bg-blue-50 hover:bg-blue-100 dark:bg-zinc-700 
         dark:text-neutral-100 rounded-xl my-2 p-4">
           <SunOutlined className="text-blue-500 text-[4rem]"/>
         </div>
@@ -122,10 +123,12 @@ const ChangeThmem = () => {
        </button>
        <button onClick={()=>setTheme('dark')}>
         <div className="bg-blue-50 rounded-xl
+          hover:bg-blue-100
          dark:bg-zinc-700 my-2
          dark:text-neutral-100
         p-4">
-          <MoonOutlined className="text-blue-500 text-[4rem]"/>
+          <MoonOutlined 
+          className="text-blue-500 text-[4rem]"/>
         </div>
         <p className="dark:text-neutral-100">
           dark
@@ -133,6 +136,7 @@ const ChangeThmem = () => {
        </button>
        <button onClick={()=>setTheme('system')}>
         <div className="bg-blue-50 my-2 rounded-xl
+        hover:bg-blue-100
          dark:bg-zinc-700 
          dark:text-neutral-100
         p-4">
@@ -170,16 +174,17 @@ useEffect(()=>{
 }, [theme])
 
 
-    return <nav className="bg-blue-400 dark:text-neutral-50
+    return <nav className="bg-blue-500 dark:text-neutral-50
      dark:bg-zinc-800
      dark:border-b
      dark:border-zinc-700 
      z-10 py-2 shadow-sm
       fixed w-full top-0">
-            <div className="max-w-4xl mx-auto">
-              {ChangeThmem()}
+        {ChangeThmem()}
+            <div className="container px-2 md:mx-auto">
                 <div className="flex items-center justify-between">
-                <span className="font-bold gap-2 items-center text-white font-mono flex">
+                <span className="font-bold gap-2
+                 items-center text-white font-mono flex">
                   <PieChartFilled
                    className="text-[2rem] font-nokora "/>
                 </span> 
@@ -188,7 +193,7 @@ useEffect(()=>{
                 <Notification></Notification>
                   <Dropdown
                   arrow={true} 
-                  className="cursor-pointer w-full text-neutral-500"
+                  className="cursor-pointer font-nokora w-full text-neutral-500"
                    trigger={['click']} menu={{items}}>
                   <Space>
                   <Avatar

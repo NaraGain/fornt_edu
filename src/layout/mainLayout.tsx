@@ -6,10 +6,10 @@ import LeftBar from "../page/main/components/leftBar";
 const MainLayout:React.FC = ()=>{
     return <>
         <Navbar/>
-        <div className="max-w-4xl top-[3.5rem] relative  mx-auto">
-            <div className="flex">
+        <div className="container top-[3.5rem] relative  mx-auto">
+            <div className="flex md:flex-row flex-col  ">
             <div className="basis-[20%]">
-                <div className="fixed">
+                <div className="md:fixed ">
                 <LeftBar/>
                 </div>
                 </div>

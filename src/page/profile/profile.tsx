@@ -15,7 +15,7 @@ const items:TabsProps['items'] = [
                 <label
                  className="flex gap-3 dark:text-neutral-100 items-center">
                     <AppstoreOutlined/>
-                    my feed</label></Link>,
+                    post</label></Link>,
         children : null
     },
     {
@@ -49,51 +49,53 @@ const items:TabsProps['items'] = [
 const Profile:React.FC = () =>{
 
     return <div className="relative 
-    mx-auto  
+    mx-auto 
     rounded-xl dark:text-neutral-100
      text-neutral-600 max-w-4xl ">
-        <span className="flex gap-5 ">
-            <div className="basis-[30%] ">
+        <span className="md:flex md:flex-row p-4  flex-1 flex-col gap-5 ">
+            <div className="md:basis-[30%]  px-3 md:px-0 my-3 md:my-0 ">
+                <div className="block">
             <Image
             className="rounded-full dark:bg-zinc-900 bg-white shadow-sm"
-             width={180}
+             width={window.innerWidth > 768 ? 180 : 80}
              src="https://techtodown.com/api/uploads/Dumb_Ways_to_Die_feature_image_webp_3755f99318.png"
              />
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col  md:items-stretch">
             <h1 className="text-[28px]">visal</h1>
-            </div>
             <p className="text-sm
-             dark:text-neutral-400 text-neutral-200">@visal_boy_loy</p>
-             <div className="flex flex-wrap gap-2">
-             <div className="my-2 inline-flex rounded-md px-1
+             dark:text-neutral-400 text-neutral-400">@visal_boy_loy</p>
+            </div>
+            <p className="text-[12px] inline-block my-2 
+                p-3 rounded-lg tracking-wide">
+             🤣👍😁Tailwind includes 
+             </p>
+             <div className="md:flex  flex-wrap gap-2">
+             <div className="m-1 inline-flex rounded-md px-1
               bg-neutral-100 border dark:bg-zinc-600">
                    <p className="text-[14px]">😁Food</p>
                 </div>
-                <div className="my-2 inline-flex border-dashed
+                <div className="m-1 inline-flex border-dashed
                  rounded-md px-1 bg-neutral-100 border dark:bg-zinc-600">
                    <p className="text-[14px]"> + add</p>
+                   </div>
                 </div>
-             </div>
-                
-             <p className="text-[12px] inline-block my-2 bg-neutral-100
-              dark:bg-zinc-900 p-3 rounded-lg tracking-wide">
-             🤣👍😁Tailwind includes an expertly-crafted default color
-              palette out-of-the-box that is a great
-             </p>
 
+             </div>
              <Button className="flex justify-center rounded-xl items-center">
                 <EditOutlined/>
                 Edite Profile
              </Button>
             </div>
-        <div className="basis-[70%] w-full">
-        <Tabs items={items}> </Tabs>
+        <div className="md:basis-[70%] px-3 md:px-0 w-full">
             <div className="">
             <HeaderProfile
            follower="13"
            following="14"
            achivment="14"
            />
+            <Tabs 
+        className="font-nokora"
+        items={items}> </Tabs>
            <div className="my-3">
            <Outlet/>
            </div>

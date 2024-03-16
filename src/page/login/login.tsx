@@ -47,7 +47,7 @@ const Login: React.FC = () => {
       <Form.Item>
         <div className='grid grid-cols-2 gap-3'>
         <Button
-        onClick={()=>navigator('/main')}
+        onClick={()=>navigator('/home')}
         className="bg-blue-500 text-white" htmlType="submit">
           log in
         </Button>

@@ -2,6 +2,7 @@ import { Avatar, ConfigProvider } from "antd";
 import React from "react"
 import { EllipsisOutlined,
      PushpinOutlined, 
+     UserOutlined, 
      WarningOutlined } from "@ant-design/icons"
 import type { MenuProps } from 'antd';
 import {Dropdown,Space} from 'antd'
@@ -10,7 +11,10 @@ import ReactContent from "./reactContent";
 
 
 interface feed {
-    path? :string
+    path? :string,
+    profile?:string,
+    username?:string,
+
 }
 
 const items:MenuProps['items'] = [{
@@ -35,7 +39,7 @@ const items:MenuProps['items'] = [{
 
 ]
 
-const Feed:React.FC<feed> = ({path}:feed)=>{
+const Feed:React.FC<feed> = ({path, username, profile}:feed)=>{
     return <div className="bg-white py-3 dark:bg-zinc-900 max-w-[34rem] 
     mb-3 
     dark:border-zinc-700 
@@ -48,12 +52,12 @@ const Feed:React.FC<feed> = ({path}:feed)=>{
         <Avatar   
         size={"large"}
         className="border border-neutral-100"
-        src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />
+        src={profile ? profile : ""} icon={profile ? "" : <UserOutlined/>}  />
         <div className="">
         <p className="
          text-neutral-800
           dark:text-neutral-200 
-          text-[18px]">visal</p>
+          text-[18px]">{username}</p>
         <p className="text-neutral-300
          dark:text-neutral-100 text-[10px]">
            1 day
