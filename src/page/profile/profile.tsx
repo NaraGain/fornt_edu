@@ -1,8 +1,12 @@
 import React from "react";
-import { Button, Image, Tabs, TabsProps} from "antd";
-import { AppstoreOutlined, CameraOutlined, 
+import { Avatar, Button, Image, Tabs, TabsProps} from "antd";
+import { AppstoreOutlined, BuildOutlined, CameraOutlined, 
      EditOutlined, 
-     MoreOutlined, UsergroupAddOutlined } from "@ant-design/icons";
+     EnvironmentOutlined, 
+     HeatMapOutlined, 
+     HomeOutlined, 
+     MailOutlined, 
+     MoreOutlined, SmileOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 import { Link, Outlet } from "react-router-dom";
 import HeaderProfile from "./components/headerProfile";
 
@@ -52,49 +56,82 @@ const Profile:React.FC = () =>{
     mx-auto 
     rounded-xl dark:text-neutral-100
      text-neutral-600 max-w-4xl ">
-        <span className="md:flex md:flex-row p-4  flex-1 flex-col gap-5 ">
-            <div className="md:basis-[30%]  px-3 md:px-0 my-3 md:my-0 ">
-                <div className="block">
-            <Image
-            className="rounded-full dark:bg-zinc-900 bg-white shadow-sm"
-             width={window.innerWidth > 768 ? 180 : 80}
-             src="https://techtodown.com/api/uploads/Dumb_Ways_to_Die_feature_image_webp_3755f99318.png"
+        <span className=" p-4  flex-1 flex-col gap-5 ">
+            <div className="flex   w-full  px-3 md:px-0 my-3 md:my-0 ">
+                <div className="flex">
+                    <div className="]">
+            <Avatar
+            size={{xs:80,sm:90,md:100,lg:100,xl:140,  xxl: 150}}
+            className="rounded-full cursor-pointer dark:bg-zinc-900 bg-white shadow-sm"
+             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgLz9Kn0X4Uq_lgXRu6geUjhiWjng7Xx6O63bgDMcJGQ&s"
              />
-            <div className="flex flex-col  md:items-stretch">
-            <h1 className="text-[28px]">visal</h1>
-            <p className="text-sm
-             dark:text-neutral-400 text-neutral-400">@visal_boy_loy</p>
-            </div>
-            <p className="text-[12px] inline-block my-2 
-                p-3 rounded-lg tracking-wide">
-             🤣👍😁Tailwind includes 
-             </p>
-             <div className="md:flex  flex-wrap gap-2">
-             <div className="m-1 inline-flex rounded-md px-1
-              bg-neutral-100 border dark:bg-zinc-600">
-                   <p className="text-[14px]">😁Food</p>
-                </div>
-                <div className="m-1 inline-flex border-dashed
-                 rounded-md px-1 bg-neutral-100 border dark:bg-zinc-600">
-                   <p className="text-[14px]"> + add</p>
-                   </div>
-                </div>
-
              </div>
-             <Button className="flex justify-center rounded-xl items-center">
-                <EditOutlined/>
-                Edite Profile
-             </Button>
+             <div className="md:items-stretch mx-2 md:mx-[2rem]">
+                <div>
+            <h1 className="md:text-[28px]">ចន្ទ័នីតាបញ្ញា</h1>
+            <p className="text-sm
+             dark:text-neutral-400 text-neutral-400">@ចន្ទ័នីតាបញ្ញា</p>
             </div>
-        <div className="md:basis-[70%] px-3 md:px-0 w-full">
-            <div className="">
             <HeaderProfile
            follower="13"
            following="14"
            achivment="14"
+           users={false}
            />
+            </div>
+            </div>
+            </div>
+
+            <div className="flex md:my-5  md:flex-row flex-col">
+                {/* user descritpion form */}
+
+                <div className="basis-[30%]  py-0 px-3 ">
+                <div className="flex  text-[14px] md:text-[14px] 2xl:text-[16px] flex-col gap-2">
+                    <div className="">
+            <p className="text-[14px] my-2 
+                p-3 rounded-lg  break-words tracking-wide">
+             🤣👍😁Be Yourself
+             </p>
+             </div>
+                <span className="flex gap-3 items-center">
+                  <EnvironmentOutlined className="text-blue-700"/>
+                  <p >St21A, Phomn Penh</p>
+                </span>
+                <span className="flex gap-3 items-center">
+                  <BuildOutlined className="text-blue-700"/>
+                  <p>Artist and Student</p>
+                </span>
+                <span className="flex gap-3 items-center">
+                  <MailOutlined className="text-blue-700"/>
+                  <p>chatpanha@gmail.com</p>
+                </span>
+                </div>
+            <div className="md:flex mx-4 my-3  flex-wrap gap-2">
+             <div className="m-1 bg-neutral-50  inline-flex rounded-md px-1
+            dark:bg-zinc-600">
+                   <p className="text-[14px]">😁Food</p>
+                </div>
+                <div className="m-1 inline-flex rounded-md px-1
+            dark:bg-zinc-600">
+                   <p className="text-[14px]">🎾Sport</p>
+                </div>
+                <div className="m-1 inline-flex rounded-md px-1
+            dark:bg-zinc-600">
+                   <p className="text-[14px]">🎏moutain</p>
+                </div>
+                <div className="m-1 inline-flex border-dashed
+                 rounded-md px-1">
+                   <button className="text-[14px] dark:bg-zinc-700 
+                    bg-neutral-100 rounded-md px-2"> + add</button>
+                   </div>
+                </div>
+            </div>
+            {/* end uer description */}
+                {/* user feed */}
+             <div className="px-3 md:px-0 basis-[70%]">
+            <div className="">
             <Tabs 
-        className="font-nokora"
+        className="font-nokora flex justify-center"
         items={items}> </Tabs>
            <div className="my-3">
            <Outlet/>
@@ -102,7 +139,8 @@ const Profile:React.FC = () =>{
             
         </div>
         </div>
-          
+
+            </div>       
             </span>
     </div>
 

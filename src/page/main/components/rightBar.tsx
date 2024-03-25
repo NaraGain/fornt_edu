@@ -27,8 +27,8 @@ const itemsList =
 const RigthBar:React.FC = () => {
         return <div className="text-[16px] md:block hidden">
                 <ul className="max-w-36">
-                <p className="px-3 my-2 dark:bg-slate-800 bg-blue-100
-     text-blue-500 inline-flex rounded-md">about</p>
+                <p className="my-2 px-2
+     text-[#1997BE] inline-flex rounded-md">About</p>
                 {
         itemsList.map((item,key)=> {return (<li key={key}>
                     <Link to={`/${item.name}`}>

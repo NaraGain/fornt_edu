@@ -4,8 +4,8 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import { Link } from "react-router-dom";
 
 const Register:React.FC  = ()=>{
-        return  <div className='flex flex-col mx-auto h-screen 
-        justify-center items-center container'>
+        return  <div className='flex dark:bg-white flex-col h-screen 
+        justify-center items-center'>
         <Form
           name="normal_login"
           className="login-form"
@@ -50,7 +50,7 @@ const Register:React.FC  = ()=>{
                 <Link to={'/login'}>
                 <Button className='bg-green-500 w-full text-white'>Go back</Button>
                 </Link>
-           <Button htmlType="submit" className='bg-blue-500 w-full
+           <Button htmlType="submit" className='bg-[#1997BE] w-full
             text-white'>Register now!</Button>
             </div>
             

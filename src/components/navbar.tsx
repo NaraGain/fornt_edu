@@ -174,7 +174,7 @@ useEffect(()=>{
 }, [theme])
 
 
-    return <nav className="bg-blue-500 dark:text-neutral-50
+    return <nav className="bg-[#1997BE] dark:text-neutral-50
      dark:bg-zinc-800
      dark:border-b
      dark:border-zinc-700 
@@ -197,7 +197,7 @@ useEffect(()=>{
                    trigger={['click']} menu={{items}}>
                   <Space>
                   <Avatar
-                   src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" 
+                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgLz9Kn0X4Uq_lgXRu6geUjhiWjng7Xx6O63bgDMcJGQ&s" 
                   style={{ backgroundColor: '#ddd6fe' }}
                   />
                   </Space>

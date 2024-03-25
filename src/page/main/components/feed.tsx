@@ -11,14 +11,15 @@ import ReactContent from "./reactContent";
 
 
 interface feed {
-    path? :string,
+    path? : string | string[] | undefined,
     profile?:string,
     username?:string,
+    describe? :string,
 
 }
 
 const items:MenuProps['items'] = [{
-    label : <a className="inline-flex gap-2">
+    label : <a className="inline-flex gap-2 font-nokora">
         <div className="bg-blue-500 
         rounded-md px-1 text-white">
             <PushpinOutlined/>
@@ -28,7 +29,7 @@ const items:MenuProps['items'] = [{
     key : 0
 },
 {
-    label: <a className="inline-flex gap-2">
+    label: <a className="inline-flex gap-2 font-nokora">
         <div className="bg-rose-500
          text-white rounded-md px-1">
         <WarningOutlined/>
@@ -39,18 +40,21 @@ const items:MenuProps['items'] = [{
 
 ]
 
-const Feed:React.FC<feed> = ({path, username, profile}:feed)=>{
-    return <div className="bg-white py-3 dark:bg-zinc-900 max-w-[34rem] 
+const Feed:React.FC<feed> = ({path, username, profile,describe}:feed)=>{
+    return <div className="bg-white w-full py-3 max-w-[34rem] 
     mb-3 
+    -z-0
+    dark:bg-zinc-700/30
     dark:border-zinc-700 
      shadow-gray-100/100
      dark:shadow-slate-900/30
   text-neutral-600  relative
-     justify-center rounded-[10px] px-6">
+        border-b dark:rou
+     justify-center rounded-md px-6">
         <span className="flex items-center justify-between gap-2">
         <label className="inline-flex gap-2 items-center">
         <Avatar   
-        size={"large"}
+          size={{ xs: 40, sm: 40, md: 40, lg: 64, xl: 45,  xxl: 45 }}
         className="border border-neutral-100"
         src={profile ? profile : ""} icon={profile ? "" : <UserOutlined/>}  />
         <div className="">
@@ -70,9 +74,9 @@ const Feed:React.FC<feed> = ({path, username, profile}:feed)=>{
             <Dropdown
             placement="bottomRight"
             arrow
-            className="cursor-pointer"
+            className="cursor-pointer "
              menu={{items}} trigger={['click']}>
-                <Space className="dark:text-neutral-400 text-[18px]">
+                <Space className="dark:text-neutral-400  text-[18px]">
                 <EllipsisOutlined/>
                 </Space>
             </Dropdown>
@@ -83,17 +87,16 @@ const Feed:React.FC<feed> = ({path, username, profile}:feed)=>{
         
         <div className=" py-3">
             <span>
-                <p className="text-[14px] my-2 dark:text-neutral-300 text-neutral-600 break-words">
-                Tailwind includes an expertly-crafted default color
-                 palette out-of-the-box that is a great starting point if you don’t have
-                  your own specific branding in mind. 
+                <p className="text-[14px] 
+                my-2 dark:text-neutral-300
+                 text-neutral-800 break-words">
+                {describe}
                 </p>
-            </span>
-        <FeedContent
-        path={path}
-        />
+                <FeedContent path={path}/>
         <ReactContent/>
-        <hr/>
+            </span>
+          
+       
         </div>
        
     </div>

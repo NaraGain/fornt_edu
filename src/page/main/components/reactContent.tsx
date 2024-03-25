@@ -12,9 +12,9 @@ const ReactContent:React.FC = ()=>{
 
 
 
-    return <><div className="flex gap-3 items-center justify-between">
+    return <><div className="flex pt-2 gap-3 items-center justify-between">
         <ul className="flex gap-6 items-center 
-         text-[20px] dark:text-neutral-300 text-neutral-500">
+         text-[20px] dark:text-neutral-300 text-neutral-800">
             <li>
             <button className="inline-flex
                 active:bg-neutral-50
@@ -45,7 +45,7 @@ const ReactContent:React.FC = ()=>{
                 </li>
         </ul>
         <span className="flex gap-3 items-center">
-        <p className="text-[14px] text-neutral-900">Liked</p>
+        <p className="text-[14px] dark:text-neutral-200 text-neutral-900">Liked</p>
         <Avatar.Group>
             <Avatar
             src="https://api.dicebear.com/7.x/miniavs/svg?seed=10"

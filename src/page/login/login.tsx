@@ -12,8 +12,9 @@ const Login: React.FC = () => {
   const navigator = useNavigate()
 
   return (
-    <div className='flex flex-col mx-auto h-screen 
-    justify-center dark:bg-gray-700 items-center container'>
+    <div className='flex w-full dark:bg-white flex-col  h-screen 
+    justify-center items-center '>
+      <h1 className='py-4 text-[20px]'>Welcome to Krayvei</h1>
     <Form
       name="normal_login"
       initialValues={{ remember: true }}
@@ -23,14 +24,14 @@ const Login: React.FC = () => {
         name="username"
         rules={[{ required: true, message: 'Please input your Username!' }]}
       >
-        <Input prefix={<UserOutlined className="dark:bg-slate-500" />} placeholder="Username" />
+        <Input prefix={<UserOutlined className="py-2 rounded-md" />} placeholder="Username or E-mail" />
       </Form.Item>
       <Form.Item
         name="password"
         rules={[{ required: true, message: 'Please input your Password!' }]}
       >
-        <Input
-          prefix={<LockOutlined className="dark:bg-slate-500" />}
+        <Input.Password
+          prefix={<LockOutlined className="py-2 rounded-md" />}
           type="password"
           placeholder="Password"
         />
@@ -48,7 +49,7 @@ const Login: React.FC = () => {
         <div className='grid grid-cols-2 gap-3'>
         <Button
         onClick={()=>navigator('/home')}
-        className="bg-blue-500 text-white" htmlType="submit">
+        className="bg-[#1997BE] text-white" htmlType="submit">
           log in
         </Button>
         <Link to={'/register'}>

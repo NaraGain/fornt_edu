@@ -1,49 +1,23 @@
-import { FloatButton, Modal,Tabs, Input, Upload, ConfigProvider } from "antd"
-import { CloseOutlined, EditOutlined, FileImageOutlined, PlusCircleOutlined, PlusOutlined, RocketOutlined, ToTopOutlined } from "@ant-design/icons"
+import {  Modal,Tabs, Input, ConfigProvider } from "antd"
+import { CameraOutlined, CloseCircleOutlined, 
+    CloudUploadOutlined,
+    MehOutlined, PlusCircleOutlined, 
+    RocketOutlined } from "@ant-design/icons"
 import { useState } from "react"
 import type { TabsProps } from 'antd';
+import ImageUpload from "./ImageUpload";
 const {TextArea} = Input
 
 
 
-const items:TabsProps['items'] = [
-    {
-        key: '1',
-        label: <label className="inline-flex dark:text-neutral-100 gap-1">
-            <EditOutlined/>
-            <p>write</p>
-            </label>,
-        children: <TextArea className="bg-neutral-100
-            font-nokora
-         dark:bg-slate-600 dark:text-neutral-200
-         text-neutral-500 border-none"
-                             placeholder="write something here..." rows={5}/>,
-      },
-      {
-        key: '2',
-        label: <label className="inline-flex dark:text-neutral-100 gap-1">
-        <FileImageOutlined/>
-        <p>image</p>
-        </label>,
-        children: <div className="space-y-3">
-            <TextArea className="bg-neutral-50
-             dark:text-neutral-200 font-nokora
-             dark:bg-slate-600 border-none rounded-md" 
-            placeholder="wirte something" rows={2}/>
-            <div className="bg-neutral-50 dark:bg-slate-600
-             dark:text-neutral-100 border-[1px]
-             border-dashed rounded-md p-4 border-neutral-300">
-                <Upload className="font-nokora">
-                    upload
-                </Upload>
-            </div>
-        </div>,
-      },
-]
 
 
-export const CreateFeed:React.FC = () => {
+
+export const CreateContent:React.FC = () => {
 const [open ,setOpen] = useState(false)
+const [previewOpen, setPreviewOpen] = useState(false);
+const [previewImage, setPreviewImage] = useState('');
+const [previewTitle, setPreviewTitle] = useState('');
 const theme = localStorage.theme
 const showModal =()=>{
  setOpen(true)
@@ -57,9 +31,44 @@ const handleCancel = ()=>{
 setOpen(false)
 }
 
+
+
+const items:TabsProps['items'] = [
+    {
+        key: '1',
+        label: <label className="inline-flex dark:text-neutral-100 gap-1">
+            <MehOutlined/>
+            <p>status</p>
+            </label>,
+        children: <TextArea className="bg-neutral-100
+            font-nokora
+         dark:bg-slate-600 dark:text-neutral-200
+         text-neutral-500 border-none"
+                             placeholder="write something here..." rows={5}/>,
+      },
+      {
+        key: '2',
+        label: <label className="inline-flex dark:text-neutral-100 gap-1">
+        <CameraOutlined/>
+        <p>photo</p>
+        </label>,
+        children: <div className="space-y-3">
+            <TextArea className="bg-neutral-50
+             dark:text-neutral-200 font-nokora
+             dark:bg-slate-600 border-none rounded-md" 
+            placeholder="wirte something" rows={2}/>
+            <div className="bg-neutral-50 dark:bg-slate-600
+             dark:text-neutral-100 border-[1px]
+             border-dashed rounded-md p-4 border-neutral-300">
+              <ImageUpload/>
+            </div>
+        </div>,
+      },
+]
+
     return <div className="md:inline-block" >
-        <h1 className="md:px-3 hidden my-2 dark:bg-slate-800 bg-blue-100
-     text-blue-500 md:inline-flex items-center rounded-md">what is news?</h1>
+        <h1 className="hidden my-2 px-2
+     text-[#1B82A1] md:inline-flex items-center rounded-md">what on your mind?</h1>
      <div>
       <button
         onClick={()=> showModal()}
@@ -110,16 +119,16 @@ setOpen(false)
                   dark:bg-zinc-700
                   dark:text-neutral-100
                   bg-neutral-100">
-                    <CloseOutlined/>
+                    <CloseCircleOutlined/>
                     <p>cancel</p></button>
                 <button className="text-sm inline-flex 
                 active:bg-neutral-300
                  items-center gap-2 rounded-md 
-                 py-1 px-2 bg-neutral-100
+                 py-1 px-2 bg-[#1B82A1]
                  dark:bg-zinc-700 dark:text-neutral-100
                  ">
-                    <ToTopOutlined/>
-                    <p>post</p>
+                    <CloudUploadOutlined  className="text-white"/>
+                    <p className="text-white">upload</p>
                    </button>
                 </div>
              )}

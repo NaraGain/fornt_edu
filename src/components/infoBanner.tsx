@@ -12,7 +12,7 @@ export const InofBanner:React.FC<infoBanner> = ({title , description , image, ch
     return  <div className="flex gap-3 flex-col p-6 rounded-xl
     bg-blue-50
         my-3 mx-4 md:mx-0
-    dark:bg-slate-800
+    dark:bg-slate-700/30
 justify-center  items-center">
    <img 
    className="object-fit h-40 w-40"
@@ -22,8 +22,8 @@ justify-center  items-center">
 {description}
 </p>
 
-<Button className="bg-blue-500 dark:border-none
- rounded-xl dark:text-neutral-100
+<Button className="bg-[#1997BE] dark:border-none
+ rounded-md dark:text-neutral-100
  text-white font-nokora">{children}</Button>
 </div>
 }

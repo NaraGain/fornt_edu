@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 
 
 export const Notification:React.FC = () => {
-        return <button className="active:bg-blue-400 bg-blue-300 rounded-md">
+        return <button className="active:bg-cyan-400 bg-cyan-500 rounded-md">
                  <Badge size="small" count={10}>
                   <div className="
 

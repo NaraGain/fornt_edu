@@ -3,8 +3,8 @@ import {BookOutlined, BuildOutlined, CompassOutlined,
       HomeOutlined,
       ReadOutlined,StarOutlined} from '@ant-design/icons'
 import { Link, useLocation, useParams } from "react-router-dom";
-import { CreateFeed } from "./createFeed";
-import { FloatButton } from "antd";
+import { CreateContent } from "../../../components/createContent/createContent";
+
 
 const itemsList = [
     {
@@ -58,10 +58,10 @@ const LeftBar:React.FC = () =>{
 
     const {pathname} = useLocation()
     return <div className="flex md:block ">
-     <CreateFeed></CreateFeed>
+    <CreateContent></CreateContent>
     <ul className="text-[16px] md:px-0 px-2 md:block md:overflow-auto overflow-x-auto w-full  flex md:my-2 md:max-w-36">
-    <h1 className="px-3 my-2 dark:bg-slate-800 bg-blue-100
-     text-blue-500 hidden md:inline-flex rounded-md">timeline</h1>
+    <h1 className="my-2
+     text-[#1B82A1] hidden px-2  md:inline-flex ">Activity</h1>
        {
         itemsList.map((item,key)=> {return (<li  key={key}>
                     <Link  to={`${item.link}`}>
