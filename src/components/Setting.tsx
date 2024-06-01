@@ -10,6 +10,7 @@ import { EllipsisOutlined, LoadingOutlined, LogoutOutlined,
 import { Link } from "react-router-dom";
 import { UserContext } from "../auth/ProtectedRoute";
 import { ThemeSetting } from "./ThemSetting";
+import { AvatarUser } from "./Avatar";
 
 interface stateProps {
   isModalOpen : boolean,
@@ -110,13 +111,9 @@ const Setting:React.FC = () =>{
     <div className="flex justify-between items-center">
         <div className=" items-center">
          <Dropdown arrow trigger={['click']} menu={{items}}>
-          <Space className="cursor-pointer text-[18px]
-          border
-          dark:bg-slate-700
-           border-neutral-100 
-           dark:border-none
-          rounded-[7px] bg-neutral-100 px-1  flex ">
-          <EllipsisOutlined/>
+          <Space className="cursor-pointer 
+           border rounded-full  border-slate-300">
+        <AvatarUser size={25} src={user?.userInfoInstance?.profile_url}/>
          </Space>
          </Dropdown>
         </div>

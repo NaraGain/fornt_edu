@@ -50,41 +50,42 @@ const {state, dispatch} = useContext(OpenModalSettinProvider)
      title={'Display setting'}
     isModalOpen={state.isModalOpen}
     handleCancel={handleCancel}>
-      <div className="grid font-nokora grid-cols-3 gap-3 p-3">
-         <button onClick={()=> setTheme('light')}>
-          <div className="bg-purple-50 hover:bg-blue-100 dark:bg-zinc-700 
-          dark:text-neutral-100 rounded-md my-2 p-4">
-            <SunOutlined className="text-blue-500 text-[4rem]"/>
-          </div>
-          <p className="dark:text-neutral-100">
+      <div className="flex w-full gap-2 text-[14px] flex-col py-3">
+         <button className="text-start" onClick={()=> setTheme('light')}>
+          <div className="bg-purple-50 flex gap-2 hover:bg-blue-100 dark:bg-zinc-700 
+          dark:text-neutral-100 rounded-lg  p-4">
+            <SunOutlined className="text-blue-500 "/>
+            <p className="dark:text-neutral-100">
             light
           </p>
+          </div>
          </button>
-         <button onClick={()=> setTheme('dark')}>
-          <div className="bg-purple-50 rounded-md
+         <button className="text-start" onClick={()=> setTheme('dark')}>
+          <div className="bg-purple-50 flex gap-3 rounded-lg
             hover:bg-blue-100
-           dark:bg-zinc-700 my-2
+           dark:bg-zinc-700
            dark:text-neutral-100
           p-4">
             <MoonOutlined 
-            className="text-purple-500 text-[4rem]"/>
-          </div>
-          <p className="dark:text-neutral-100">
+            className="text-purple-500"/>
+             <p className="dark:text-neutral-100">
             dark
           </p>
+          </div>
          </button>
-         <button onClick={()=>setTheme('system')}>
-          <div className="bg-purple-50 my-4 rounded-md
+         <button className="text-start" onClick={()=>setTheme('system')}>
+          <div className="bg-purple-50 rounded-lg
           hover:bg-blue-100
            dark:bg-zinc-700 
            dark:text-neutral-100
-          p-4">
+          p-4 flex items-center gap-3">
             <LaptopOutlined
-             className="text-[#7469B6] text-[4rem]"/>
+             className="text-[#7469B6] "/>
+              <p className="dark:text-neutral-100">
+              system
+              </p>
           </div>
-          <p className="dark:text-neutral-100">
-            system
-          </p>
+         
          </button>
          </div>
     </Modals>

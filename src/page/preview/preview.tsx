@@ -1,5 +1,7 @@
 import { ArrowLeftOutlined, ArrowRightOutlined,
-     CloudUploadOutlined } from "@ant-design/icons"
+     CloudUploadOutlined, 
+     LeftOutlined,
+     RightOutlined} from "@ant-design/icons"
 import { Image,Button, Form, message, Input } from "antd"
 import { Link, useLocation } from "react-router-dom"
 import { createCommentPost, deleteComment, getPostOne, getcommentPost } from "../../api/feed"
@@ -176,54 +178,40 @@ useEffect(()=> {
 
   <Link to={`/p/${post?.userInstance?.username}/feed`}
    className="flex py-3 items-center gap-2">
-    
     <AvatarUser src={post?.userInstance?.userInfoInstance?.profile_url}/>
+    <div className="">
     <p className="font-medium">{post?.userInstance.username}</p>
+    <p className="text-[12px] text-neutral-400">{moment(post?.created_at).calendar()}</p>
+    </div>
+   
   </Link>
   <div className="flex flex-row 
   bg-neutral-50 px-3 py-2 rounded-lg overflow-hidden overflow-y-auto
-    dark:border-gray-700 my-2 dark:bg-gray-800 dark:hover:bg-gray-700">
+    dark:border-gray-700 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700">
         {post?.uploadFiles?.length !==0 ? <React.Fragment> {
       post?.uploadFiles &&  post?.uploadFiles?.length === 1 ?
     <img  className="object-cover w-full border rounded-lg h-96 
     md:h-auto md:w-[10rem]  md:rounded-md" 
     src={post?.uploadFiles[0]?.upload_url} alt=""/>:
     <React.Fragment>  
-<div  className="relative w-full" data-carousel="static">
-    <div className="relative md:auto overflow-hidden  ">
-        <div className="duration-700 ease-in-out" data-carousel-item>
-            <Image
-            height={150}
-            width={250}
-            src={post?.uploadFiles[currentImage]?.upload_url}
-             className="absolute block rounded-md border border-neutral-100
-              w-full h-full bg-slate-400 object-cover 
-             -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+   <div className="relative w-[14rem] max-w-2xl overflow-hidden">
+        <div className="carousel flex transition-transform duration-500 ease-out">
+            <div className=" w-[14rem] h-[10rem] bg-black rounded-md flex items-center">
+                <Image src={post?.uploadFiles && post?.uploadFiles[currentImage]?.upload_url} 
+                className=" w-full h-[10rem] relative object-contain rounded-md  "/>
+            </div>
         </div>
-        
+      
+        <button onClick={handlePrevClick} className="absolute top-1/2 left-0 
+         -translate-y-1/2  text-white px-4 py-2" id="prev">
+            <LeftOutlined/>
+        </button>
+       
+        <button onClick={handleNextClick} className="absolute top-1/2 right-0 
+         -translate-y-1/2  text-white px-4 py-2" id="next">
+           <RightOutlined/>
+        </button>
     </div>
-   
-    <button onClick={handlePrevClick} 
-    className="absolute top-0 start-0 hover:bg-none z-30 flex
-     items-center justify-center 0 h-full px-4 cursor-pointer group 
-     focus:outline-none" data-carousel-prev>
-        <span className="bg-slate-700/40 text-neutral-50
-         px-2 py-1 rounded-full border border-neutral-400">
-        <ArrowLeftOutlined/>    
-        </span>
-  
-    </button>
-    <button onClick={handleNextClick} 
-     className="absolute border-none top-0 end-0 z-30 flex items-center
-     justify-center h-full text-white px-4 cursor-pointer 
-     group focus:outline-none" data-carousel-next>
-        <span className="bg-slate-700/40 text-neutral-50
-         px-2 py-1 rounded-full border border-neutral-400">
-        <ArrowRightOutlined/>    
-        </span>
-    </button>
-
-</div>
 
     </React.Fragment>
 }
