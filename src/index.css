@@ -4,13 +4,12 @@
 
 
 
+/* Your other CSS */
+
+
 @layer base {
     body {
-        background-color: #fafafa;
         box-sizing: border-box;
         margin: 0%;
     }
-
-    
-    
 }

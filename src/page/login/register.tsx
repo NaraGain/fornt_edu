@@ -2,11 +2,27 @@ import React from "react";
 import { LockOutlined, UserOutlined,MailOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { Link } from "react-router-dom";
+import { registerUser } from "../../api/user";
 
 const Register:React.FC  = ()=>{
-        return  <div className='flex dark:bg-white flex-col h-screen 
+
+
+  const register = async (value:any) => {
+    try {
+        // const respone = await registerUser(value)
+        alert(1)
+        console.log(value)
+    } catch (error) {
+      
+    }
+}
+
+
+        return  <div className='flex bg-neutral-50  flex-col h-screen 
         justify-center items-center'>
+          <h1>Require for create new account</h1>
         <Form
+          onFinish={register}
           name="normal_login"
           className="login-form"
           initialValues={{ remember: true }}
@@ -35,7 +51,7 @@ const Register:React.FC  = ()=>{
             />
           </Form.Item>
           <Form.Item
-            name="confirm_password"
+            name="confirmPassword"
             rules={[{ required: true, message: 'Please input your confirm_Password!' }]}
           >
             <Input.Password
@@ -50,8 +66,9 @@ const Register:React.FC  = ()=>{
                 <Link to={'/login'}>
                 <Button className='bg-green-500 w-full text-white'>Go back</Button>
                 </Link>
-           <Button htmlType="submit" className='bg-[#1997BE] w-full
-            text-white'>Register now!</Button>
+                
+                  <Button htmlType="submit" className='bg-[#1997BE] w-full
+                 text-white'>submit form!</Button>
             </div>
             
           </Form.Item>

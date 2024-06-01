@@ -4,13 +4,40 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { ConfigProvider } from 'antd';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+
+const queryClient = new QueryClient()
+
+
+const theme = localStorage.theme
+
+const color = theme === "dark" ? "#27272a" : "#ffffff"
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <App/>
+    <ConfigProvider
+    theme={{
+      components:{
+        Dropdown : {
+          colorBgElevated : color,
+          colorText : theme == "dark" ? "#ffffff" : "#27272a"
+        },
+      }
+    }}
+    >
+      <QueryClientProvider client={queryClient}>
+        <App/>
+        </QueryClientProvider>
+    </ConfigProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

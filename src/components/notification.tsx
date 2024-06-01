@@ -7,16 +7,15 @@ import { Link } from "react-router-dom"
 
 
 export const Notification:React.FC = () => {
-        return <button className="active:bg-cyan-400 bg-cyan-500 rounded-md">
-                 <Badge size="small" count={10}>
-                  <div className="
-
-                  text-white
-                   p-2 rounded-md">
-                    <Link to={"/notification"}>
+        return  <Link to={"/notification"}> <div className="
+                    dark:bg-zinc-600 
+                  text-[14px] py-1 px-2 border
+                   dark:text-white
+                  border-neutral-200
+                  bg-neutral-100
+                  text-neutral-400
+                   rounded-[7px]">
                     <BellOutlined/>
-                    </Link>
                   </div>
-                </Badge>
-        </button>
+                  </Link>
 }

@@ -1,28 +1,28 @@
 import { useNavigate } from "react-router-dom"
-import { Button } from "antd"
+
 import React from "react"
-import { ArrowLeftOutlined } from "@ant-design/icons"
+
 
 
 interface navigateButton  {
-    text : string,
+    text? : string,
+   icons?: JSX.Element
 }
 
-const NavigatorButton:React.FC<navigateButton> = ({text}:navigateButton) => {
+const NavigatorButton:React.FC<navigateButton> = ({text, icons}:navigateButton) => {
 
     const navigate = useNavigate()
 
-    return <Button 
-    className="mb-3 flex 
+    return <button 
+    className="flex 
     items-center 
-     rounded-full
-      shadow-sm
+      shadow-none
        dark:bg-zinc-900
-     dark:text-white bg-neutral-100 border-none" type="default"
+     dark:text-white  border-none" 
     onClick={()=> navigate(-1)}>
-        <ArrowLeftOutlined/>
+       {icons}
         {text}
-    </Button>
+    </button>
 }
 
 

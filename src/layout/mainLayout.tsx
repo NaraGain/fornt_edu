@@ -1,25 +1,24 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../components/navbar";
-import LeftBar from "../page/main/components/leftBar";
-
+import LeftBar from "../page/home/components/leftBar";
 
 const MainLayout:React.FC = ()=>{
-    return <>
-        <Navbar/>
-        <div className="container top-[3.5rem] relative  mx-auto">
-            <div className="flex md:flex-row flex-col  ">
-            <div className="basis-[20%]">
-                <div className="md:fixed ">
-                <LeftBar/>
-                </div>
-                </div>
-        <div className="basis-[80%]">
-        <Outlet/>
+       return <div className="flex md:flex-row flex-col relative ">
+        <div className="dark:bg-zinc-800
+          md:w-64 w-full
+         bg-neutral-50/55
+         md:dark:bg-zinc-700/20
+         fixed 
+         shadow-gray-400/20"> 
+         <div className="w-full flex">
+           <LeftBar/>
+
+    </div>
+    </div>
+    <div className="flex-1 flex md:ml-[13rem] flex-col w-full">
+            <Outlet/>
+    </div>
+
         </div>
-            </div>
-        </div>
-        
-    </>
 }
 
 export default MainLayout;
