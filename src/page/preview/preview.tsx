@@ -173,8 +173,8 @@ useEffect(()=> {
             <NavigatorButton icons={<ArrowLeftOutlined/>}/>
             <p>Comment</p>
             </label>
-            <div className="bg-neutral-50  rounded-lg">
-            <Link to={`/p/${post?.userInstance?.username}/feed`}
+
+  <Link to={`/p/${post?.userInstance?.username}/feed`}
    className="flex py-3 items-center gap-2">
     
     <AvatarUser src={post?.userInstance?.userInfoInstance?.profile_url}/>
@@ -244,7 +244,6 @@ useEffect(()=> {
                 }
     </div>
 
-</div>
 </div>
      {/* commentlist        */}
     <div className="flex-1 overflow-hidden overflow-y-auto">
