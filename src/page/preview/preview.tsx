@@ -62,11 +62,9 @@ export interface commentPost {
 
 
 export const Preview:React.FC  = () => {
-const {state:stateOpenModal, dispatch:dispatchModal} = useContext(OpenModal)
 const [currentImage , setCurrentImage] = useState<number>(0)
 const [messageApi, contextHolder] = message.useMessage()
 const [comment ,setComment] = useState<commentPost[]>([])
-const [commentInput ,setCommentInput] = useState<string | null>(null)
 const [post ,setPost] = useState<postProps | null>(null)
 // const postid = stateOpenModal?.postid  
 const currentUser:any = useContext(UserContext)

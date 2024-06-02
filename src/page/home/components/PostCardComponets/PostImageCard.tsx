@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Carousel, ConfigProvider, Image } from "antd";
 import { Link } from "react-router-dom";
+
 
 
 interface feedContent {
@@ -8,6 +9,39 @@ interface feedContent {
     size? : string,
     type? : string,
    
+}
+
+const checkImageExists = async (url:string) => {
+    try {
+        const img_url = url == undefined ? `/${url}` : url
+        const response:any = await 
+        fetch(`http://localhost:4000${img_url}` 
+        ,{method : 'HEAD'});
+        return response.ok;
+    } catch (error) {
+        alert(error)
+        return false
+    }
+}
+
+export const ImageChecker:React.FC<{imageUrl:string}> = ({imageUrl}) => {
+    const [imageExists , setImageExists] = useState(null)
+
+    useEffect(()=>{
+        const checkImage = async () =>{
+            const exists = await checkImageExists(imageUrl as string)
+            setImageExists(exists)
+        }
+        checkImage()
+    }, [imageUrl])
+    console.log(imageExists)
+    return <>
+            <div>
+                {imageExists === null && <>checking image ...</>}
+                {imageExists == true && <img src={imageUrl} alt="image"/>}
+                {imageExists === false && <p>Image dose nto exist.</p>}
+            </div>
+    </>
 }
 
 const PostImageCard:React.FC<feedContent> = ({path ,size ,type}:feedContent) =>{
@@ -31,14 +65,18 @@ const PostImageCard:React.FC<feedContent> = ({path ,size ,type}:feedContent) =>{
                   }}
                 >
                 <Carousel 
-                arrows
+                arrows 
                 infinite={false}
                 dotPosition="bottom">
                     {
-                        path?.map((item:any,key:any)=><React.Fragment key={key}>
-                        <img
+                        path?.map((item:any,key:any)=>
+                        <React.Fragment key={key}>
+                        <Image
+                        width={"100%"}
+                        height={380}
                         loading="lazy"
-                        className="w-full border-[1px] bg-zinc-900 rounded-[5px] object-contain h-[30rem]"
+                        className="w-full border-[1px]
+                         bg-zinc-900 rounded-[5px] object-cover h-[40rem]"
                         src={item.upload_url}/>
                         </React.Fragment> 
                         

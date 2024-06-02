@@ -1,4 +1,4 @@
-import { Space,Dropdown,} from "antd";
+import { Space,Dropdown, message,} from "antd";
 import React, { createContext, useContext, useReducer, useState} from "react";
 import type { MenuProps } from 'antd'
 import { EllipsisOutlined, LoadingOutlined, LogoutOutlined,  
@@ -47,15 +47,20 @@ const Setting:React.FC = () =>{
   const user:any = useContext(UserContext)
   const [loading ,setLoading] = useState(false)
   const [state , dispatch]  = useReducer(reducer, initialState)
+  const [messageApi , contextHolder] = message.useMessage()
   const handleLogOut = () =>{
-    setLoading(true)
+    messageApi.open({
+      type: "loading",
+      content: "log out user account ...",
+      duration : 0,
+    })
     setTimeout(()=> {
       localStorage.removeItem('TOKEN')
       localStorage.removeItem('userId')
       localStorage.removeItem('username')
+      localStorage.removeItem('friend')
       window.location.href = "/login"
-      setLoading(false)
-    }, 2000)
+    }, 2500)
      
   }
 
@@ -107,13 +112,15 @@ const Setting:React.FC = () =>{
 
  
     return <OpenModalSettinProvider.Provider value={{state,dispatch}}>
+      {contextHolder}
  <div className="">
     <div className="flex justify-between items-center">
         <div className=" items-center">
          <Dropdown arrow trigger={['click']} menu={{items}}>
           <Space className="cursor-pointer 
-           border rounded-full  border-slate-300">
-        <AvatarUser size={25} src={user?.userInfoInstance?.profile_url}/>
+           border rounded-full bg-neutral-100  border-slate-300">
+          <AvatarUser size={35} src={user?.userInfoInstance?.profile_url}/>
+          <label className="pl-1 mr-1">More</label>
          </Space>
          </Dropdown>
         </div>

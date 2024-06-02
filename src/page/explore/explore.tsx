@@ -104,8 +104,8 @@ const [showMore , setShowMore] = useState<boolean>(false)
                                                 object-center transition
                                                 duration-200 group-hover:scale-110" 
                                                 loading="lazy"
-                                                src={file.upload_url} 
-                                                alt="Uploaded file"
+                                                src={file?.upload_url} 
+                                                
                                             />
                                         </React.Fragment>
                                     ))
@@ -117,8 +117,8 @@ const [showMore , setShowMore] = useState<boolean>(false)
                                                 object-center transition
                                                 duration-200 group-hover:scale-110" 
                                                 loading="lazy"
-                                                src={file.upload_url} 
-                                                alt="Uploaded file"
+                                                src={file?.upload_url} 
+                                               
                                             />
                                             <div className="pointer-events-none absolute inset-0 
                                             bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50">
@@ -133,8 +133,8 @@ const [showMore , setShowMore] = useState<boolean>(false)
                                  via-red-500 to-yellow-500 p-[1px] rounded-full">
                                 <AvatarUser src={item?.userInstance?.userInfoInstance?.profile_url} />
                                 </div>
-                                <p className={ `${ item.uploadFiles.length ? "text-white font-medium" 
-                                : "text-[16px] font-medium"}`}>{item.userInstance.username}</p>
+                                <p className={ `${ item?.uploadFiles?.length ? "text-white font-medium" 
+                                : "text-[16px] font-medium"}`}>{item?.userInstance?.username}</p>
                             </span>
                             <span className={`z-10 ${ item?.uploadFiles?.length ? "text-white" : ""}`}>
                             <TotalLikeAndComment pid={item?.postid}/>

@@ -6,7 +6,7 @@ import { UsergroupAddOutlined, TrophyOutlined,
      ShareAltOutlined,
     } from "@ant-design/icons";
 import { Button, message, } from "antd";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { ProfileContext } from "../profile";
 import { UserContext } from "../../../auth/ProtectedRoute";
 import { useMutation, useQuery } from "react-query";
@@ -22,7 +22,7 @@ const { data:profile } = useContext(ProfileContext)
 const currentUser:any = useContext(UserContext)
 const [change ,setChange] = useState<boolean>(false)
 const [messageApi, contextHolder] = message.useMessage()
-
+const navigate = useNavigate()
 
 
 const {data:count ,isLoading:loading} = useQuery(
@@ -53,9 +53,6 @@ const {mutate , isLoading} = useMutation(makeFriend, {
     }
 })
 
-
-
-
 const handleClick = async () =>{
     try {
       setChange(!change)
@@ -70,7 +67,20 @@ const handleClick = async () =>{
     }
 }
 
+
+const handleNavigate = (type:string) => {
+    localStorage.setItem('friend', profile?.userid)
+    if(type === "follower"){
+        navigate('/f/follower')  
+    }else if(type == "following"){
+        navigate('/f/following')
+    }
+}
+
 useEffect(()=> {
+    if(window.location.pathname !== `/f`){
+        localStorage.removeItem('friend')
+    }
 },[profile])
 
     return<> <div className="flex-col 
@@ -79,7 +89,7 @@ useEffect(()=> {
         {
             loading ? <HeaderProfileLoader/> :
     <div className="flex gap-5 w-full text-[20px] text-center">
-    <div className="">
+    <button onClick={()=>handleNavigate("follower")}  className="">
    <h4 className=" font-sans font-semibold">{count?.result?.follower}</h4>
    <div className="flex items-center">
    <UsergroupAddOutlined
@@ -87,10 +97,11 @@ useEffect(()=> {
    <p className="text-zinc-400 
     text-[12px] truncate">follower</p>
    </div>
-   </div>
+   </button>
         
-   <div className="
-   ">
+   <button 
+   onClick={()=>handleNavigate("following")} 
+   className=" ">
    <h1 className=" 
    font-sans font-semibold">{count?.result?.following} </h1>
    <div className="flex 
@@ -100,7 +111,7 @@ useEffect(()=> {
    <p className="text-zinc-400  
     text-[12px] truncate">following</p>
    </div>
-   </div>
+   </button>
 
    <div className="text-center">
    <h1 className=" font-sans font-semibold ">{ 
@@ -121,7 +132,9 @@ useEffect(()=> {
         loading={isLoading}
         onClick={handleClick}
         disabled={count?.result?.isFollowing}
-    icon={count?.result?.isFollowing ? <UserOutlined/> : count?.result?.isFollower ? <UserOutlined/> : <UserAddOutlined/>}
+    icon={count?.result?.isFollowing ? <UserOutlined/> : 
+    count?.result?.isFollower ? <UserOutlined/> 
+    : <UserAddOutlined/>}
     className={`md:text-[14px] ${profile?.username !== currentUser?.username ? " " : ""}
      dark:bg-cyan-600
      bg-slate-800 rounded-md

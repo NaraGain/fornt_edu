@@ -18,6 +18,7 @@ import { ProtecedRoute } from './auth/ProtectedRoute';
 import { Preview } from './page/preview/preview';
 import { LoaderPage } from './components/loader/loaderPage';
 import { EditProfile } from './page/profile/editProfile';
+import { Friend } from './page/friend/Friend';
 
 
 
@@ -48,6 +49,8 @@ const loading = false
           <Route path='/about' element={<About/>}></Route>
           <Route path='/notification' element={<NotificationPage/>}></Route>
           <Route path='/pv' element={<Preview></Preview>}></Route>
+
+          <Route path='/f/:type' element={<Friend/>}/>
         </Route>
        
         <Route path='/test' element={<Test/>}></Route>

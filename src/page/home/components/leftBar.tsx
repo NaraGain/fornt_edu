@@ -126,7 +126,6 @@ const LeftBar:React.FC = () =>{
          dark:text-neutral-300">More</h1>
          <div className="px-2 py-1.5 dark:text-neutral-300 dark:border-none flex gap-2 items-center text-neutral-700">
         <Setting/>
-         <p>More</p>
          </div>
     </div>
     </div>
