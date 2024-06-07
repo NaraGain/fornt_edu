@@ -73,7 +73,8 @@ const {state, dispatch} = useContext(OpenModalSettinProvider)
           </p>
           </div>
          </button>
-         <button className="text-start" onClick={()=>setTheme('system')}>
+         <button className="text-start"
+          onClick={()=>setTheme('system')}>
           <div className="bg-purple-50 rounded-lg
           hover:bg-blue-100
            dark:bg-zinc-700 

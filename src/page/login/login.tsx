@@ -1,10 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, {  useState } from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input, message } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { Button,  Form, Input, message } from 'antd';
+import { Link } from 'react-router-dom';
 import { login } from '../../api/user';
-import { UserContext } from '../../state/userState/userContext';
-import { LoaderPage } from '../../components/loader/loaderPage';
 
 
 interface user {
@@ -19,20 +17,29 @@ const [isLoading ,setLoading] = useState<boolean>(false)
 
   const onFinish = async (values: user) => {
     try {
+      setLoading(true)
       const response = await login(values)
+      messageApi.open({
+        key : 'login',
+        type : "loading",
+        content : "loading...",
+        duration : 0
+      })
       if(response.success){
-
           localStorage.setItem('TOKEN', response?.token)
           localStorage.setItem('userId' , response?.userId)
           localStorage.setItem('username', response?.username)
            window.location.href = "/home"
+           messageApi.destroy('login')
          
       }else{
         messageApi.warning(response.message)
+        messageApi.destroy('login')
       }
-    
+      setLoading(false)
     } catch (error:any) {
       messageApi.error(error)
+      messageApi.destroy('login')
     }
   };
 
@@ -42,9 +49,9 @@ const [isLoading ,setLoading] = useState<boolean>(false)
     <div className='flex w-full bg-neutral-50  flex-col  h-screen 
     justify-center items-center '>
       {contextHolder}
-      
-      <img className='h-14 rounded-full  filter grayscale contrast-200 brightness-0
-          dark:brightness-75 w-14' src='./logoNav.png'/>
+      <img className='h-10 w-10 rounded-full  filter
+       grayscale contrast-200 brightness-0
+          dark:brightness-75 ' src='./logoNav.png'/>
       <h1 className='pb-2 text-neutral-600 text-[18px] 
       font-thin tracking-wide'>Welcome to Krakvei</h1>
       <div className='bg-white rounded-md border dark:border md:mt-0 
@@ -81,11 +88,12 @@ const [isLoading ,setLoading] = useState<boolean>(false)
       </Form.Item>
       <Form.Item>
         <Button
-        loading={isLoading}
         type='primary'
         className="bg-[#7469B6] w-full text-white"
          htmlType="submit">
-         Sign in
+          {
+            isLoading ? "Signing in user..." : "Sign in"
+          }
         </Button>
       </Form.Item>
     </Form>

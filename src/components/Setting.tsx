@@ -50,6 +50,7 @@ const Setting:React.FC = () =>{
   const [messageApi , contextHolder] = message.useMessage()
   const handleLogOut = () =>{
     messageApi.open({
+      key : "logout",
       type: "loading",
       content: "log out user account ...",
       duration : 0,
@@ -60,8 +61,9 @@ const Setting:React.FC = () =>{
       localStorage.removeItem('username')
       localStorage.removeItem('friend')
       window.location.href = "/login"
-    }, 2500)
-     
+      messageApi.destroy('logout')
+    }, 1000)
+   
   }
 
   const handleShow = () => {
@@ -117,10 +119,9 @@ const Setting:React.FC = () =>{
     <div className="flex justify-between items-center">
         <div className=" items-center">
          <Dropdown arrow trigger={['click']} menu={{items}}>
-          <Space className="cursor-pointer 
-           border rounded-full bg-neutral-100  border-slate-300">
-          <AvatarUser size={35} src={user?.userInfoInstance?.profile_url}/>
-          <label className="pl-1 mr-1">More</label>
+          <Space className="cursor-pointer">
+          <AvatarUser size={30} src={user?.userInfoInstance?.profile_url}/>
+          <label className="pl-1 text-[16px] tracking-wide mr-1">{user?.username}</label>
          </Space>
          </Dropdown>
         </div>

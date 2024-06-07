@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import {BookOutlined, CompassOutlined, 
-      HomeOutlined,MenuFoldOutlined,MenuOutlined,NotificationOutlined,PlusCircleOutlined,
-    SettingOutlined,
+      HomeOutlined,MenuFoldOutlined,NotificationOutlined,
+    SearchOutlined,
     StarOutlined,
       TeamOutlined,
       UploadOutlined,} from '@ant-design/icons'
 import { Link, useLocation } from "react-router-dom";
 import { CreateContent } from "../../../components/createContent/createContent";
-import { UserContext } from "../../../auth/ProtectedRoute";
 import Setting from "../../../components/Setting"
+import { SearchBtn } from "../../../components/searchBtn";
 
 
 const itemsList = [
@@ -59,28 +59,35 @@ const itemsList = [
 ]
 
 const LeftBar:React.FC = () =>{
-    const currentUser:any = useContext(UserContext)
     const {pathname} = useLocation()
-    return <div className="flex justify-between flex-col h-screen flex-1 ">
-        <div className="px-2 flex items-center justify-between  py-2 ">
+    return <div className="md:flex md:justify-between md:flex-col h-screen md:flex-1 ">
+        <div className="px-2 flex items-center justify-between border-b md:border-none
+         mb-3 md:mb-0 py-2 ">
         <div className="text-white font-semibold">
           <img className="w-8 h-8 rounded-full 
           filter grayscale contrast-200 brightness-0
           dark:brightness-75
           " src="./logoNav.png"/>
         </div>
-        <button className="text-[20px] active:text-neutral-500 text-neutral-600">
+        <div className="flex gap-3 items-center ">
+          <SearchBtn/>
+        <button onClick={()=>alert(1)} className="text-[20px]
+        dark:text-neutral-300
+         active:text-neutral-500 text-neutral-600">
             <MenuFoldOutlined/>
         </button>
         </div>
-    <div className="overflow-y-auto h-full py-3  px-2">
+      
+        </div>
+    <div className="overflow-y-auto hidden lg:block h-full py-3  px-2">
         <div className="px-2 hidden md:block">
         <h1 className=" pb-3 text-neutral-400  tracking-wide
          dark:text-neutral-300">Activity</h1>
         <CreateContent
     icons={<div className="p-1.5 flex  dark:bg-slate-700
      dark:border-neutral-700 bg-neutral-100 text-neutral-600 items-center
-       md:text-[16px] dark:text-neutral-300 rounded-full md:rounded-[7px]">
+       md:text-[16px] dark:text-neutral-300
+        rounded-full md:rounded-[7px]">
         <UploadOutlined/>
    </div>}
    title="Create Post"
@@ -124,7 +131,9 @@ const LeftBar:React.FC = () =>{
     <div className="px-2 py-1  hidden md:block">
     <h1 className=" px-2 py-1 text-neutral-500  tracking-wide
          dark:text-neutral-300">More</h1>
-         <div className="px-2 py-1.5 dark:text-neutral-300 dark:border-none flex gap-2 items-center text-neutral-700">
+         <div className="px-2 py-1.5
+          dark:text-neutral-300 dark:border-none 
+          flex gap-2 items-center text-neutral-700">
         <Setting/>
          </div>
     </div>

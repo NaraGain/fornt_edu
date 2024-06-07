@@ -14,7 +14,7 @@ export function ProtecedRoute({ children }: ProtecedRoute) {
     const [messageApi , contextHolder] = message.useMessage()
     const token = localStorage.getItem('TOKEN')
     const userid:any = localStorage.getItem('userId')
-    const queryClient = useQueryClient()
+  
   
     
     const { data: userData, error, isLoading, isError } 

@@ -1,16 +1,16 @@
 import { Image } from "antd"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { userFile } from "../../../api/user"
 import { useContext, useEffect, useState } from "react"
 import { ProfileContext } from "../profile"
-import { FileUnknownOutlined } from "@ant-design/icons"
+
 
 export const UserPhoto = () =>{
 
     const {username} = useParams()
-    const [file ,setFile] = useState<[] | null>([])
-    const  user = useContext(ProfileContext)
-
+    const [file ,setFile] = useState<[] | null | string[]>([])
+    const  {data:user} = useContext(ProfileContext)
+    const [message , setMessage] = useState('')
     const queryUserFile = async() => {
         try {
             const response = await userFile({
@@ -20,11 +20,8 @@ export const UserPhoto = () =>{
             filter((file:any) => file?.upload_url !== null)
             setFile(fileFilter)
             if(!response.sucess){
-               setFile(null)
+              setMessage(response.message)
             }
-
-         
-
         } catch (error:any) {
             alert(error.response.data.message)
         }
@@ -32,7 +29,7 @@ export const UserPhoto = () =>{
 
     useEffect(()=>{
         queryUserFile()
-    },[])
+    },[user])
 
     return <div className="">
         {
@@ -41,12 +38,14 @@ export const UserPhoto = () =>{
           tracking-wide text-neutral-500
           font-thin
            items-center justify-center ">
-            <h1>No file Found</h1>
+            <h1>{message}</h1>
            </div> :<ul className="grid grid-cols-2 md:grid-cols-3 gap-1">
-             {file?.map((items:any,key)=> <li key={key}>
-            {items?.upload_url ? <img key={key}
-             className="h-auto border max-w-full rounded-[5px]"
-         src={`${items?.upload_url}`}/> : <></> }
+             {file?.map((items:any,key:any)=> <li key={key}>
+            {items?.upload_url ? <Link to={`/pv?post=${items?.postid}`}>
+                <img key={key}
+             className="h-auto border dark:border-zinc-700 max-w-full rounded-[5px]"
+         src={`${items?.upload_url}`}/>
+            </Link> : <></> }
             </li>)
                 }
             </ul>

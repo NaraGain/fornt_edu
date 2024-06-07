@@ -57,7 +57,7 @@ const [showMore , setShowMore] = useState<boolean>(false)
         queryFn : TestQueryPublicFeedWithReactQuest,
         cacheTime : 10000,
         getNextPageParam:(lastPage:Page<result> , pages:Page<result>[]) => {
-            return lastPage.result.length ? pages.length + 1 : undefined
+            return lastPage?.result?.length ? pages?.length + 1 : undefined
         },
         // getPreviousPageParam:(prevPage:Page<result>, pages:Page<result>[])=> {
         //     return prevPage.result.length ?  pages.length - 1 : undefined

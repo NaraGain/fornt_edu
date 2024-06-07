@@ -57,7 +57,7 @@ const Profile:React.FC = () =>{
            <UserInfo/>
             <HeaderProfile/>
             </header>
-            <section className="max-w-xl  mx-auto">
+            <section className="max-w-3xl mx-auto">
         <div className="my-3">
            <RenderTab tabName={tab as string}/>
            </div>

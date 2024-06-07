@@ -5,6 +5,7 @@ import type { TabsProps } from 'antd';
 import ImageUpload from "./ImageUpload";
 import { StatusUpload } from "./statusUpload";
 import { Modals } from "../Modals";
+import ScrollToTopButton from "../ScrollToTopButton";
 
 
 
@@ -47,7 +48,8 @@ const reducer = (state:newState, action:Action):newState => {
   }
 
 
-export const CreateContent:React.FC<feedProps> = ({ icons ,title}:feedProps) => {
+export const CreateContent:React.FC<feedProps> = 
+({ icons ,title}:feedProps) => {
 
 const [state, dispatch] = useReducer(reducer , initialState)
 
@@ -89,7 +91,7 @@ const items:TabsProps['items'] = [
 
     return <OpenModalContext.Provider  
     value={{state, dispatch}}>
-   <div className="md:inline-block" >
+   <div className="">
       <button
         onClick={()=> showModal()}
             className=" border-none

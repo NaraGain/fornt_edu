@@ -20,6 +20,15 @@ export const registerUser = async (payload:any) => {
     }
 }
 
+export const userSearch = async (payload:any):Promise<any> => {
+    try {
+        const response = await baseReactQueryInstance.get(`/user/find?search=${payload.username}`)
+        return response.data
+    } catch (error:any) {
+        return error.response.data
+    }
+}
+
 export const userProfile = async (payload:any):Promise<any> => {
     try {
         const response = await baseReactQueryInstance.post(`user/profiles`, payload)
@@ -40,7 +49,7 @@ export const changeProfile = async (paylaod:any):Promise<any> => {
 
 export const userFeed = async (payload:any)=>{
     try {
-        const response = await axiosInstance.post(`api/v1/post/userfeed` , payload)
+        const response = await baseReactQueryInstance.post(`post/userfeed` , payload)
         return response.data
     } catch (error:any) {
         return error.response.data
@@ -49,19 +58,19 @@ export const userFeed = async (payload:any)=>{
 
 export const upldateUserInfo = async (payload:any)=>{
     try {
-        const response = await axiosInstance.post(`api/v1/user/update`, payload)
+        const response = await baseReactQueryInstance.post(`user/update`, payload)
         return response.data
     } catch (error:any) {
-        return error.response.data
+        return error.response
     }
 }
 
 export const userFile = async (payload:any) => {
     try {
-        const response = await axiosInstance.post(`api/v1/user/userFile`, payload)
-        return response.data
+        const response = await baseReactQueryInstance.post(`user/userFile`, payload)
+        return response?.data
     } catch (error:any) {
-        return error.response
+        return error?.response?.data
     }
 }
 
@@ -81,6 +90,15 @@ export const makeFriend = async (payload:any):Promise<any> => {
         return response.data
     } catch (error) {
         return error
+    }
+}
+
+export const removeFriend = async (payload:any):Promise<any> => {
+    try {
+        const response = await baseReactQueryInstance.post(`friend/remove`, payload)
+        return response?.data
+    } catch (error:any) {
+        return error?.response?.data
     }
 }
 

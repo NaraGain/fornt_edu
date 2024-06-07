@@ -19,6 +19,7 @@ import { Preview } from './page/preview/preview';
 import { LoaderPage } from './components/loader/loaderPage';
 import { EditProfile } from './page/profile/editProfile';
 import { Friend } from './page/friend/Friend';
+import { Chat } from './page/chat/chat';
 
 
 
@@ -35,6 +36,7 @@ const loading = false
         <Route path={`/`} element={<Login/>}/>
         <Route path={`/login`} element={<Login/>}/>
         <Route path={`/register`} element={<Register/>}/>
+        <Route path={`/chat`} element={<ProtecedRoute><Chat/></ProtecedRoute>}/>
         <Route path={`/`} errorElement={<>Error</>} 
         element={<ProtecedRoute><MainLayout></MainLayout></ProtecedRoute>}>
           <Route path='/home' element={<ProtecedRoute><Home/></ProtecedRoute>}></Route>

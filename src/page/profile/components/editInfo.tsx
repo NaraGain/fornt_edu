@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { Form ,Input, Button } from "antd"
+import { Form ,Input, Button, message } from "antd"
 import { upldateUserInfo } from "../../../api/user"
 import { useForm } from "antd/es/form/Form"
 import { EditInfoProvider } from "../editProfile"
@@ -10,17 +10,16 @@ export const EditInfo = () =>{
     const [loading ,setLoading] = useState<boolean>(false)
     const [form] = useForm()
     const data:any = useContext(EditInfoProvider)
-
+    const [messageApi, contextHolder] = message.useMessage()
     const update_userInfo = async (value: object) => {
         try {
-            console.log(value)
             setLoading(true)
             const response = await upldateUserInfo(value)
     
             if(!response.success){
                     setLoading(false)
             }else{
-                alert(response.message)
+                messageApi.error(response.message)
                 form.setFieldsValue(response.result[0])
                 setLoading(false)
             }
@@ -46,13 +45,15 @@ export const EditInfo = () =>{
 
 
     return <>
+    {contextHolder}
     <Form
     onFinish={update_userInfo}
     form={form}
- 
+    className="dark:text-white"
     layout="vertical">
         <div className="">
         <Form.Item
+        className="dark:text-neutral-200"
         name="firstname"
         rules={[{
             required : true,

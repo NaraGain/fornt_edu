@@ -34,7 +34,6 @@ export const ImageChecker:React.FC<{imageUrl:string}> = ({imageUrl}) => {
         }
         checkImage()
     }, [imageUrl])
-    console.log(imageExists)
     return <>
             <div>
                 {imageExists === null && <>checking image ...</>}
@@ -52,7 +51,7 @@ const PostImageCard:React.FC<feedContent> = ({path ,size ,type}:feedContent) =>{
                 loading="lazy"
                 className="object-fit md:rounded-[6px] 
                  border-[1px] dark:border-neutral-700
-                  border-neutral-200 relative" src={path}/>
+                  border-neutral-200  relative" src={path}/>
             ) : (
                 path.length > 1 ? <>
                 <ConfigProvider
@@ -76,7 +75,7 @@ const PostImageCard:React.FC<feedContent> = ({path ,size ,type}:feedContent) =>{
                         height={380}
                         loading="lazy"
                         className="w-full border-[1px]
-                         bg-zinc-900 rounded-[5px] object-cover h-[40rem]"
+                         bg-zinc-900 rounded-[5px] dark:border-neutral-700 object-cover h-[40rem]"
                         src={item.upload_url}/>
                         </React.Fragment> 
                         

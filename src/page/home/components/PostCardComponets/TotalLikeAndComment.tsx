@@ -32,7 +32,7 @@ export const TotalLikeAndComment:React.FC<{pid : string}> = ({pid}) =>{
                 like by {data?.result?.countLike} people</p>
             </div>
             <Link to={`/pv?post=${pid}`}> 
-            <div className="flex  gap-2 text-[12px]">
+            <div className="flex dark:text-neutral-100  gap-2 text-[12px]">
             <p className={isLoading ? "hidden":""}>comment {data?.result?.countComment}</p>
             </div>
             </Link>

@@ -168,12 +168,8 @@ useEffect(()=> {
      return  <>
      {contextHolder}
         <div className="h-screen md:ml-14 flex flex-col max-w-sm px-4 py-3
-       bg-white  overflow-hidden md:max-w-lg">
-        <label className="flex gap-2 items-center mb-2">
-            <NavigatorButton icons={<ArrowLeftOutlined/>}/>
-            <p>Comment</p>
-            </label>
-
+           overflow-hidden md:max-w-2xl">
+            <NavigatorButton text="Comment" icons={<ArrowLeftOutlined/>}/>
   <Link to={`/p/${post?.userInstance?.username}/feed`}
    className="flex py-3 items-center gap-2">
     <AvatarUser src={post?.userInstance?.userInfoInstance?.profile_url}/>
@@ -185,10 +181,11 @@ useEffect(()=> {
   </Link>
   <div className="flex flex-row 
   bg-neutral-50 px-3 py-2 rounded-lg overflow-hidden overflow-y-auto
-    dark:border-gray-700 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700">
+    dark:border-gray-700 mb-2 dark:bg-zinc-800 dark:hover:bg-gray-700">
         {post?.uploadFiles?.length !==0 ? <React.Fragment> {
       post?.uploadFiles &&  post?.uploadFiles?.length === 1 ?
-    <img  className="object-cover w-full border rounded-lg h-96 
+    <Image width={224} height={160} 
+     className="object-cover w-full dark:border-zinc-800 border rounded-lg h-96 
     md:h-auto md:w-[10rem]  md:rounded-md" 
     src={post?.uploadFiles[0]?.upload_url} alt=""/>:
     <React.Fragment>  
@@ -246,22 +243,22 @@ useEffect(()=> {
                                 </li> :<>
                             {
                                 commentData?.result?.map((comment:commentPost)=>
-                                 <li  key={comment?.commentid} className="flex my-2 items-center gap-2 ">
+                                 <li  key={comment?.commentid} className="flex my-4 items-center gap-2 ">
                                     <AvatarUser 
                                     size={30}
                                     src={comment?.userInstance?.userInfoInstance?.profile_url}/>
                                     <div>
                                     <div className="flex  gap-2">
                                         <p className="text-[12px] font-medium">{comment?.userInstance?.username}</p>
-                                        <p className="text-[12px] text-neutral-600">
+                                        <p className="text-[12px] dark:text-neutral-200 text-neutral-600">
                                         {comment?.comment}
                                     </p>
                                         </div>
-                                    <span className="flex text-neutral-500 mx-1 gap-2 text-[10px]">
+                                    <span className="flex text-neutral-500 mx-1 dark:text-neutral-300 gap-2 text-[10px]">
                                     <p>{moment(comment?.created_at).fromNow()}</p>
                                     {
                                         post?.userid === comment?.userInstance?.userid ?
-                                         <p className="font-medium text-slate-800">auth</p> : <></>
+                                         <p className="font-medium dark:text-neutral-300 text-slate-800">auth</p> : <></>
                                     }
                                     {
                                         currentUser?.userid === comment?.userInstance?.userid ? <React.Fragment>
@@ -299,13 +296,17 @@ useEffect(()=> {
             <Form.Item 
             className="hidden"
             name="userid" initialValue={currentUser?.userid}>
-                <Input/>
+                <Input />
             </Form.Item>
             <Form.Item className="w-full" name="comment">
-            <Input placeholder="add some text..."/>
+            <Input className="dark:text-white
+             border-zinc-200
+             dark:bg-zinc-700" placeholder="add some text..."/>
             </Form.Item>
             <Form.Item initialValue={postid} name="postid">
-                <Button loading={loadingAddComment} htmlType="submit" icon={<CloudUploadOutlined/>} />
+                <Button className="dark:text-white
+             border-zinc-200
+             dark:bg-zinc-700" loading={loadingAddComment} htmlType="submit" icon={<CloudUploadOutlined/>} />
             </Form.Item>
         </Form>
     </div>

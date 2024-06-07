@@ -10,6 +10,7 @@ import { useInfiniteQuery,} from "react-query";
 import PostCard from "./components/PostCard";
 import { LoaderPostCard } from "../../components/loader/loaderPostCard";
 import { restoreScrollPosition, saveScrollPosition } from "../../utils/scroll";
+import { message } from "antd";
 
 
 
@@ -43,7 +44,8 @@ export interface result {
 export interface Page<T> {
     result: T[];
     previousCursor?: number;
-    nextCursor?: number;
+    pagination?: any;
+    nextPage : any,
   }
 
   
@@ -53,7 +55,7 @@ const currentUser:any = useContext(UserContext)
 const {state} = useContext(OpenModalContext)
 const location = useLocation();
 const scrollKey = `scroll-position-${location.pathname}`;
-
+const [messageApi ,contextHolder ] = message.useMessage()
 
 const {data,error, isLoading
     ,isFetchingNextPage , 
@@ -65,12 +67,15 @@ const {data,error, isLoading
     isError} = useInfiniteQuery<Page<result>, Error>({
             queryKey : ['home'],
             
-            queryFn : TestQueryPublicFeedWithReactQuest,
+            queryFn :({pageParam})=> TestQueryPublicFeedWithReactQuest({
+                pageParam : pageParam
+            }),
             staleTime: 1000 * 60 * 5, // 5 minutes
             cacheTime: 1000 * 60 * 10, // 10 minutes
             keepPreviousData : true,
             getNextPageParam : (lastPage:Page<result> ,pages:Page<result>[]) => {
-              return  lastPage?.result.length ? pages?.length + 1 : undefined
+                console.log(pages)
+              return   lastPage?.result?.length ? pages?.length + 1 : undefined
             }
         },
         
@@ -97,17 +102,17 @@ const {data,error, isLoading
   //   };
   // }, [scrollKey]);
 
-  
-
     return (
         <>
+        {contextHolder}
        {
         error ? <>Error</> : null
        }
-       <div className="md:flex  md:gap-6 ">
+       <div className="md:flex md:gap-6 ">
             <div className="md:basis-[80%] w-full flex flex-col justify-center items-center">
                 <div className="w-full my-2 
-                flex px-2 md:px-0 2xl:max-w-[35rem] max-w-[30rem] mx-auto py-3 ">
+                z-10 relative
+                flex px-2 md:px-0 2xl:max-w-[35rem] md:max-w-[30rem] mx-auto py-3 ">
                     <span className="flex  border-b
                      dark:border-neutral-600 w-full">
                     <div className="inline-flex items-center  gap-2 py-2  ">
@@ -152,16 +157,18 @@ const {data,error, isLoading
                  data?.pages.map((page , i)=> (
                         <React.Fragment key={i}>
                             {
-                             page?.result && page.result.map((item:result)=> <React.Fragment
+                             page?.result && page?.result?.
+                             map((item:result)=> <React.Fragment
                                key={item?.postid}
                                >
                                 <PostCard
-                                userid={item.userInstance.userid}   
+                                userid={item?.userInstance?.userid}   
                                username={item?.userInstance?.username}
                                postid={item?.postid}
                                date={item?.created_at}
                                describe={item?.content}
-                               profile={item?.userInstance?.userInfoInstance?.profile_url}
+                               profile={item?.userInstance?.
+                                userInfoInstance?.profile_url}
                                path={item?.uploadFiles}/>
                                </React.Fragment>       
                                )
@@ -173,7 +180,10 @@ const {data,error, isLoading
         <div className="py-2  text-center ">
         <button
         ref={lastItemRef}
-        className="bg-neutral-50 text-neutral-500 rounded-md px-2 py-1 text-[14px]"
+        className="bg-neutral-50 font-thin
+         dark:bg-slate-800 dark:text-neutral-100
+          text-neutral-500 rounded-md
+           px-2 py-1 text-[14px]"
           onClick={() => fetchNextPage()} >
           {isFetchingNextPage
             ? <LoadingOutlined/>
@@ -182,7 +192,7 @@ const {data,error, isLoading
             : isFetching ? "" : 'Nothing more to load'}
         </button>
       </div>
-      <div className="text-neutral-500">
+      <div className="text-neutral-500 dark:text-neutral-100">
         {isFetching && !isFetchingNextPage ? "backGround Fetching..." : null}
       </div>
             </div>

@@ -15,13 +15,12 @@ const NavigatorButton:React.FC<navigateButton> = ({text, icons}:navigateButton) 
 
     return <button 
     className="flex 
-    items-center 
+    items-center gap-2
       shadow-none
-       dark:bg-zinc-900
      dark:text-white  border-none" 
     onClick={()=> navigate(-1)}>
        {icons}
-        {text}
+      <p>{text}</p>
     </button>
 }
 

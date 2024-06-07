@@ -12,6 +12,7 @@ import { UserContext } from "../../../auth/ProtectedRoute";
 import { useMutation, useQuery } from "react-query";
 import { countTotalFriend, makeFriend } from "../../../api/user";
 import { HeaderProfileLoader } from "../../../components/loader/heardProfileLoader";
+import { FriendButton } from "./friendButton";
 
 
 
@@ -40,32 +41,6 @@ const {data:count ,isLoading:loading} = useQuery(
 
 
 
-const {mutate , isLoading} = useMutation(makeFriend, {
-    onSuccess: (data)=> {
-        if(data.success){
-            messageApi.success(data.message)
-        }else{
-            messageApi.error(data.message)
-        }
-    },
-    onError: (error)=> {
-        messageApi.error('there was an error operation')
-    }
-})
-
-const handleClick = async () =>{
-    try {
-      setChange(!change)
-      await mutate({
-                userid1 : currentUser?.userid,
-                userid2 : profile?.userid
-            })
-    
-       
-    } catch (error:any) {
-        messageApi.error(error)
-    }
-}
 
 
 const handleNavigate = (type:string) => {
@@ -125,47 +100,9 @@ useEffect(()=> {
    </div>
     </div>
 }
-    <span className={profile?.username 
-    && currentUser?.username ? 
-    "flex px-4  gap-3 text-[14px] flex-wrap border-none md:border-b py-5" : "animate-pluse"}>
-        {profile?.username !== currentUser?.username ?  <Button 
-        loading={isLoading}
-        onClick={handleClick}
-        disabled={count?.result?.isFollowing}
-    icon={count?.result?.isFollowing ? <UserOutlined/> : 
-    count?.result?.isFollower ? <UserOutlined/> 
-    : <UserAddOutlined/>}
-    className={`md:text-[14px] ${profile?.username !== currentUser?.username ? " " : ""}
-     dark:bg-cyan-600
-     bg-slate-800 rounded-md
-     text-white
-      dark:text-white border-none 
-        text-[12px]`}>
-        {
-            count?.result?.isFollowing ? "Following" : count?.result?.isFollower ? "Following" : "Follow"
-        }</Button> :<div className="flex gap-2"> <Link
-            to={`/u?name=${currentUser?.username}`}>
-                <Button
-                icon={<EditOutlined/>}
-                className="flex items-center
-                border-none 
-                w-full
-                bg-neutral-100
-                 rounded-lg">
-                    Edit info
-                </Button>
-              </Link> 
-              </div>
-        }
-        <Button
-                className="border-none shadow-none"
-                disabled
-                icon={<ShareAltOutlined/>}
-                >
-                    Share profile
-                </Button>
-    </span> 
 
+    <FriendButton isFollower={count?.checkFollower} 
+    isFollowing={count?.checkFollowing}/>
     </div>
     </>
 }

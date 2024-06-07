@@ -1,58 +1,90 @@
-import { CloseOutlined, SearchOutlined } from "@ant-design/icons"
+import { CloseOutlined, LoadingOutlined, SearchOutlined } from "@ant-design/icons"
 import React, { useState, useEffect } from "react";
+import { Modal,Form, Input, Button } from "antd";
+import { useMutation } from "react-query";
+import { userSearch } from "../api/user";
+import { AvatarUser } from "./Avatar";
+import { Link } from "react-router-dom";
 
 
 
-const Dropdown: React.FC = () => {
-    return (
-      <div className="absolute max-w-md w-full mt-2 text-[14px] 
-       bg-white border border-gray-300 rounded shadow-md">
-        <ul>
-          <li className="py-2 px-4 
-          cursor-pointer flex gap-1 items-center 
-           hover:bg-gray-100">
-          <CloseOutlined className="text-[12px]"/>
-            <p>ption 1</p>
-            </li>
-          
-          <li className="py-2 px-4 cursor-pointer
-           hover:bg-gray-100">Option 2</li>
-          <li className="py-2 px-4 cursor-pointer
-           hover:bg-gray-100">Option 3</li>
-        </ul>
-      </div>
-    );
-  };
-  
+interface Search  {
+  target_url ? : string,
+}
 
-export const SearchBtn:React.FC = () =>{   
-    const [isOpen, setIsOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+export const SearchBtn:React.FC<Search> = ({target_url = '#'}) =>{   
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [message ,setMessages] = useState<string>('')
+  const showModal = () => {
+    setIsModalOpen(true);
   };
 
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
 
-    return <form onSubmit={(event) => event.preventDefault()}
-     className="w-full max-w-md flex">
-    <input 
-    type="text" placeholder="Search people"
-        className="w-full py-1.5 text-[14px]
-         px-4  bg-neutral-50
-         rounded-l-full
-         dark:bg-zinc-700
-         dark:text-neutral-200
-          focus:outline-none
-           focus:border-blue-500"/>
-           <button type="submit" className="bg-gray-100 
-            flex items-center dark:text-neutral-100 text-neutral-500
-             dark:bg-zinc-600
-           rounded-r-full px-2">
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const {isLoading, mutate, data} = useMutation(userSearch , {
+    onSuccess : (data:any) => {
+      if(!data.success) {
+        setMessages(data.message)
+      }
+    },
+    onError:(error)=>{
+      alert(`error something `)
+    }
+  })
+
+  const handleSearch = async (value:any) => {
+    try {
+      await mutate(value)
+    } catch (error) {
+      alert(error)
+    }
+  }
+
+    return <>
+           <button onClick={showModal} type="submit" 
+           className="text-[20px]
+        dark:text-neutral-300
+         active:text-neutral-500 text-neutral-600">
            <SearchOutlined/>
            </button>
-           
-         
-</form>
+          
+<Modal title="Search" open={isModalOpen
 
+} onOk={handleOk} footer onCancel={handleCancel}>
+       <Form 
+       onFinish={handleSearch}
+       className=" flex gap-2  w-full">
+        <Form.Item name="username" className="w-full">
+          <Input className="w-full"
+           placeholder="search something people"/>
+        </Form.Item>
+        <Form.Item>
+          <Button
+          htmlType="submit"
+          icon={<SearchOutlined/>}
+          />
+        </Form.Item>
+       </Form>
 
+       <div>
+        {message && <p>{message}</p>}
+        {isLoading ? <LoadingOutlined></LoadingOutlined> : null}
+        <ul>
+          {data?.result.map((user:any,)=> <li className="my-3" key={user?.userid}>
+            <Link className="flex gap-2 items-center py-1 " to={`${target_url}${user?.username}`}>
+            <AvatarUser src={user?.userInfoInstance?.profile_url}/>
+            <p className="text-zinc-700 dark:text-neutral-100">{user?.username}</p>
+            </Link>
+          </li>)}
+        </ul>
+       </div>
+      </Modal>
+</>
 }
