@@ -1,4 +1,4 @@
-import { CloseOutlined, LoadingOutlined, SearchOutlined } from "@ant-design/icons"
+import { CloseOutlined, UserOutlined, LoadingOutlined, SearchOutlined, MessageOutlined } from "@ant-design/icons"
 import React, { useState, useEffect } from "react";
 import { Modal,Form, Input, Button } from "antd";
 import { useMutation } from "react-query";
@@ -48,10 +48,7 @@ export const SearchBtn:React.FC<Search> = ({target_url = '#'}) =>{
   }
 
     return <>
-           <button onClick={showModal} type="submit" 
-           className="text-[20px]
-        dark:text-neutral-300
-         active:text-neutral-500 text-neutral-600">
+           <button onClick={showModal} type="submit" >
            <SearchOutlined/>
            </button>
           
@@ -77,11 +74,20 @@ export const SearchBtn:React.FC<Search> = ({target_url = '#'}) =>{
         {message && <p>{message}</p>}
         {isLoading ? <LoadingOutlined></LoadingOutlined> : null}
         <ul>
-          {data?.result.map((user:any,)=> <li className="my-3" key={user?.userid}>
-            <Link className="flex gap-2 items-center py-1 " to={`${target_url}${user?.username}`}>
+          {data?.result?.map((user:any,)=> <li className="my-3 flex gap-2 items-center 
+          justify-between" key={user?.userid}>
+            <div className="flex gap-4 items-center">
             <AvatarUser src={user?.userInfoInstance?.profile_url}/>
             <p className="text-zinc-700 dark:text-neutral-100">{user?.username}</p>
+          </div>
+          <div className="flex gap-2">
+          <Link to={`/p/${user?.username}/feed`}>
+            <UserOutlined/>
             </Link>
+            <Link to={`/chat/p/${user?.userid}`}>
+            <MessageOutlined/>  
+            </Link>
+            </div>
           </li>)}
         </ul>
        </div>

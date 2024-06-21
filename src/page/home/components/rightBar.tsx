@@ -1,5 +1,5 @@
 import React from "react";
-import { BellOutlined, InfoCircleOutlined, TagOutlined, UserOutlined } from "@ant-design/icons";
+import { BellOutlined, CommentOutlined, InfoCircleOutlined, TagOutlined, UserOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 
@@ -10,6 +10,13 @@ const itemsList =
                 icon : <UserOutlined  />,
                 color : "bg-blue-500",
             },
+            {
+                id : 1,
+                name : "chat",
+                icon : <CommentOutlined/>,
+                color : "bg-blue-500",
+                link : "/chat/p",
+                 },
             {
                 name : 'Notification',
                 icon : <BellOutlined/>,

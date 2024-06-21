@@ -2,14 +2,16 @@ import React, { useContext } from "react"
 import { UserContext } from "../../../auth/ProtectedRoute"
 import { ProfileContext } from "../profile"
 import { Button } from "antd"
-import { EditOutlined, ShareAltOutlined, UserAddOutlined, UserDeleteOutlined } from "@ant-design/icons"
+import { CheckCircleOutlined, EditOutlined, ShareAltOutlined, UserAddOutlined, UserDeleteOutlined } from "@ant-design/icons"
 import { useNavigate } from "react-router-dom"
 import { useMutation, useQueryClient } from "react-query"
 import { makeFriend, removeFriend } from "../../../api/user"
+import { acceptedFriend } from "../../../api/friend"
 
 interface FriendButtonProps  {
     isFollowing? : boolean,
     isFollower? : boolean,
+    isFriend? :boolean,
 }
 
 
@@ -88,12 +90,54 @@ const RemoveButton = () => {
         }
     }
 
+   
+
     
 
-    return <Button
+    return <><Button
     loading={isLoading}
     onClick={handleRemove}>
         Remove</Button>
+        </>
+}
+
+const AcceptButton = () => {
+    const queryClient = useQueryClient()
+    const authUser:any = useContext(UserContext)
+    const {data:currentUser} = useContext(ProfileContext)
+
+    const {mutate:AcceptMutate , isLoading:AcceptLoading} = useMutation(acceptedFriend, {
+        onSuccess : (data:any) => {
+            if(!data.success){
+                alert(data.message
+                )   
+               }else{
+                   queryClient.invalidateQueries(['friendCount'])  
+               }
+        },
+        onError:(error)=>{
+            alert(`there was an error operation`)
+        }
+    })
+
+
+    const handleAccepted = async () => {
+        try {
+            await AcceptMutate({
+                receiverId : authUser?.userid,
+                requesterId : currentUser?.userid
+            })
+        } catch (error) {
+            alert(`error unfollowing`)
+        }
+    }
+    return <>
+    <Button
+        loading={AcceptLoading}
+        onClick={handleAccepted}>
+            Accept
+        </Button>
+    </>
 }
 
 const UnfollowingButton = () => {
@@ -167,7 +211,7 @@ const ShareProfileButton = () => {
 }
 
 export const FriendButton:React.FC<FriendButtonProps> = 
-({isFollowing=false , isFollower=false}) => {
+({isFollowing=false ,isFriend=false, isFollower=false}) => {
     const authUser:any = useContext(UserContext)
     const {data:currentUser} = useContext(ProfileContext)
  
@@ -177,13 +221,20 @@ export const FriendButton:React.FC<FriendButtonProps> =
     authUser?.userid !== currentUser?.userid ? <>
     {
         isFollowing && <UnfollowingButton/> } 
-        
+
+    {
+        !isFriend && <AcceptButton/>
+    }        
     {
         isFollower && <RemoveButton/>
     }
+   
+    {
+        isFriend && <> <RemoveButton/> <Button icon={<CheckCircleOutlined/>}>Friend</Button> <Button>Block</Button> </>
+    }
 
     {
-        !isFollowing && !isFollower && <FollowButton/>
+        !isFollowing && !isFollower && !isFriend && <FollowButton/>
     }
     </> : <>
     <EditProfileButtin/>

@@ -101,7 +101,7 @@ useEffect(()=> {
     </div>
 }
 
-    <FriendButton isFollower={count?.checkFollower} 
+    <FriendButton isFriend ={count?.checkFriend} isFollower={count?.checkFollower} 
     isFollowing={count?.checkFollowing}/>
     </div>
     </>

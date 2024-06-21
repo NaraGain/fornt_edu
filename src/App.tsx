@@ -20,6 +20,12 @@ import { LoaderPage } from './components/loader/loaderPage';
 import { EditProfile } from './page/profile/editProfile';
 import { Friend } from './page/friend/Friend';
 import { Chat } from './page/chat/chat';
+import { Message } from './page/chat/meessage';
+import { Contact } from './page/chat/contact';
+import { Group } from "./page/chat/group"
+import { Conversation } from './page/chat/conversation';
+import { PrivateChat } from './page/chat/privateChat';
+import { Active } from './page/chat/active';
 
 
 
@@ -36,7 +42,22 @@ const loading = false
         <Route path={`/`} element={<Login/>}/>
         <Route path={`/login`} element={<Login/>}/>
         <Route path={`/register`} element={<Register/>}/>
-        <Route path={`/chat`} element={<ProtecedRoute><Chat/></ProtecedRoute>}/>
+        <Route path={`/chat`} element={<ProtecedRoute><Chat/></ProtecedRoute>}>
+
+        <Route path={`/chat/c/`}  element={<ProtecedRoute><Contact/></ProtecedRoute>}></Route>
+        <Route path={`/chat/c/:name`}  element={<ProtecedRoute><Contact/></ProtecedRoute>} ></Route>
+
+        <Route path='/chat/a/' element={<ProtecedRoute><Active/></ProtecedRoute>}></Route>
+        <Route path='/chat/a/:name' element={<ProtecedRoute><Active/></ProtecedRoute>}></Route>
+
+        <Route path={`/chat/g/`} element={<ProtecedRoute><Group></Group></ProtecedRoute>}></Route>
+        <Route path={`/chat/g/:name`} element={<ProtecedRoute><Group></Group></ProtecedRoute>}></Route>
+
+        <Route path={'/chat/p/'} element={<PrivateChat/>}></Route>
+        <Route path={'/chat/p/:name'} element={<PrivateChat/>}></Route> 
+        </Route>
+       
+
         <Route path={`/`} errorElement={<>Error</>} 
         element={<ProtecedRoute><MainLayout></MainLayout></ProtecedRoute>}>
           <Route path='/home' element={<ProtecedRoute><Home/></ProtecedRoute>}></Route>
